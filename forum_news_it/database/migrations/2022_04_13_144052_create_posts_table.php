@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             // $table->foreignId('id_categorie')->constrained("categorie")->nullable();
-            $table->increments('id_post');
+            $table->id()->autoIncrement();
             $table->String("sjt_post");
             $table->integer("upvote")->default(0);
             // $table->String('reff_util');
@@ -25,7 +25,6 @@ return new class extends Migration
             $table->foreignId('utilisateur_id')->constrained();
             $table->integer("downvote")->default(0);
             $table->date("date_post");
-            $table->foreign('reff_util')->references('id')->on('post');
 
  
             // $table->foreign('reff_util')->references('reff_uti')->on('posts');

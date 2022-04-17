@@ -14,7 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('admins', function (Blueprint $table) {
-            $table->String("reff_admin")->primary();
+            $table->id()->autoIncrement();
+            $table->String("reff_admin")->unique();
             $table->String("pass");
             $table->timestamps();
         });
