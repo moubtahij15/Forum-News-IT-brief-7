@@ -1,12 +1,12 @@
-@extends('layout')
+{{-- @extends('layout')
 {{-- @extends('components/navbar') --}}
-@section('content')
+{{-- @section('content') --}} 
     <!-- tailwind.config.js -->
 
 
 
     <!-- component -->
-    <div>
+    {{-- <div>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 
         <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
@@ -209,7 +209,7 @@
 
 
                         <!-- posts -->
-                        <div class="bg-gray-100 p-3 mb-2 flex flex-col items-center  justify-space ">
+                        {{-- <div class="bg-gray-100 p-3 mb-2 flex flex-col items-center  justify-space ">
                             <!--middle wall-->
                             <div class="bg-white border shadow-sm px-4 py-3 rounded-lg max-w-lg mb-8">
                                 <div class="flex">
@@ -441,6 +441,23 @@
                     </div>
                 </main>
             </div>
-        </div>
-    </div>
-@endsection
+        </div> --}}
+    {{-- </div> --}} 
+{{-- @endsection --}}
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel - Vue 3</title>
+</head>
+<body>
+
+    <!-- L'élément HTML d'identifiant "app" -->
+    <div id="app" ></div>
+
+    <!-- On importe le fichier « /public/js/app.js » -->
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" ></script>
+
+</body>
+</html>
