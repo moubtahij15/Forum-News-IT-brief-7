@@ -1,5 +1,5 @@
 @extends('layout')
-@extends('components/navbar')
+{{-- @extends('components/navbar') --}}
 @section('content')
     <!-- tailwind.config.js -->
 

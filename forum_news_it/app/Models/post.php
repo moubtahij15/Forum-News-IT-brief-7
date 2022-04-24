@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class post extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'sjt_post',
+        'upvote',
+        'categorie_id',
+        'utilisateur_id',
+        'downvote',
+        'date_post'
+    ];
 }

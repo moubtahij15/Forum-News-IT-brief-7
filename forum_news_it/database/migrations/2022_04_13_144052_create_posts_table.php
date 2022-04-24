@@ -19,14 +19,13 @@ return new class extends Migration
             $table->String("sjt_post");
             $table->integer("upvote")->default(0);
             // $table->String('reff_util');
-            $table->string('reff_util', 32);
 
             $table->foreignId('categorie_id')->constrained();
             $table->foreignId('utilisateur_id')->constrained();
             $table->integer("downvote")->default(0);
             $table->date("date_post");
 
- 
+
             // $table->foreign('reff_util')->references('reff_uti')->on('posts');
             // $table->foreignId("reff_uti")->constrained();
 
