@@ -83,7 +83,8 @@
       </DisclosurePanel>
     </Disclosure>
 
-       
+             <router-view></router-view>
+
   </div>
 </template>
 
