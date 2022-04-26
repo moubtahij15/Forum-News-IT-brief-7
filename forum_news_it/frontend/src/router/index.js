@@ -1,23 +1,23 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Dashboard from "../views/Dashboard.vue";
+import HomePage from "../views/HomePage.vue";
 import Register from "../views/Register.vue";
 import Login from "../views/Login.vue";
 import navBar from "../components/navBar.vue";
 import Auth from "../components/Auth.vue";
-// import test from "../views/test.vue";
+import ProfileUser from "../views/ProfileUser.vue";
 
 import  store  from "../store";
 const routes=[
     {
         path:'/',
-        redirect:'/dashboard',
+        redirect:'/homePage',
         component:navBar,
         meta:{requiresAuth : true},
         children: [
             
-            { path:'/dashboard', name:'Dashboard',component:Dashboard},
-            
+            { path:'/homePage', name:'HomePage',component:HomePage},
+            { path:'/profileUser', name:'ProfileUser',component:ProfileUser},
         ]
     }, 
    
@@ -28,6 +28,8 @@ const routes=[
 
         name:'Auth',
         component:Auth,
+        meta: {isGuest :true},
+
         children :[ {
             path:'/login',
             name:'Login',
@@ -55,9 +57,9 @@ router.beforeEach((to,from,next)=>{
 if(to.meta.requiresAuth && !store.state.user.token){
 
     next({name:'Login'});
-}else if(store.state.user.token && (to.name==='Login'||to.name==='Register')){
+}else if(store.state.user.token && (to.meta.isGuest)){
    
-    next({name:'Dashboard'});
+    next({name:'HomePage'});
 }
 else {
     next();

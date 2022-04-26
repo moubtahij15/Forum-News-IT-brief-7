@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <h1>test</h1>
+  <h1>Profile</h1>
 </template>
 
 <script>
