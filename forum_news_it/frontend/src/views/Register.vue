@@ -65,7 +65,7 @@
                 required="required" type="email" name="integration[shop_name]" id="integration_shop_name">
             <p class="text-red text-xs hidden">Please fill out this field.</p>
         </div>
-        <div class="mb-3 space-y-2 w-full text-xs"> 
+        <div class="mb-3 space-y-2 w-full text-xs">
             <label class="font-semibold text-gray-600 py-2">Date de Naissance <abbr title="required">*</abbr></label>
             <input placeholder="Date de naissance" v-model="user.date_naissance"
                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
@@ -74,7 +74,7 @@
         </div>
         <div class="mb-3 space-y-2 w-full text-xs">
             <label class="font-semibold text-gray-600 py-2">Mot de passe <abbr title="required">*</abbr></label>
-            <input placeholder="mot de passe" v-model="user.password"
+            <input placeholder="mot de passe" v-model="user.pass"
                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                 required="required" type="password" name="integration[shop_name]" id="integration_shop_name">
             <p class="text-red text-xs hidden">Please fill out this field.</p>
@@ -108,16 +108,19 @@
 import { LockClosedIcon } from '@heroicons/vue/solid'
 import { useRouter } from 'vue-router';
 import store from "../store";
+import axios from "axios";
+
 const router = useRouter();
 const user = {
     // id: "",
-    nom: "",
-    prenom: "",
-    email: "",
-    password: "",
-    date_naissance: "",
-    age: ""
+    "nom": "",
+    "prenom": "",
+    "date_naissance": "",
+    "email": "",
+    "pass": "",
 };
+
+
 function register(ev) {
     ev.preventDefault();
     store

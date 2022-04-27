@@ -3,6 +3,9 @@
 import { createStore } from "vuex";
 import axios from "axios";
 // import axiosClient from "../axios";
+import axiosClient from "../axios";
+import { UserAddIcon } from "@heroicons/vue/solid";
+
 
 
 
@@ -19,33 +22,22 @@ const store = createStore({
 
     actions: {
         register({ commit }, user) {
-            const headers = {
-                // 'X-CSRF-TOKEN': ('meta[name="csrf-token"]').attr('content')
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Accept': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
 
-                // 'Accept-Encoding': 'gzip, deflate, br',
-                'Content-Type': 'application/json'
-            };
-            return axios.post('http://127.0.0.1:8000/api/register', user, {
-
-                headers: headers
-            }).then(response => {
-                    // JSON responses are automatically parsed.
+            return axiosClient.post('/register', user)
+                .then(response => {
                     commit("setUser", response);
                     return response
                 });
-            // register({commit}, user) {
-            //     return axiosClient.post('http://127.0.0.1:8000/api/register', user)
-            //       .then((response) => {
-            //         commit('setUser', response);
-            //         return response;
-            //       })
-            //   },
-
         },
+        login({ commit }, user) {
 
+            return axiosClient.post('/login', user)
+                .then(response => {
+                    commit("setUser", response);
+                    return response
+                });
+        },
+        
     },
     mutations: {
         logout: (state) => {

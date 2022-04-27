@@ -19,7 +19,7 @@ class AuthController extends Controller
             'prenom'=> 'required|String',
             'date_naissance'=> 'required|Date',
             'email'=>'required|string|unique :utilisateurs,email',
-            'pass'=>'required|string|confirmed'
+            'pass'=>'required|string'
         ]);
         $utilisateur=utilisateur::create([
             'nom'=> $fields['nom'],

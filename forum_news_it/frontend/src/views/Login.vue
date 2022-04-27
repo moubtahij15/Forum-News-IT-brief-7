@@ -34,19 +34,19 @@
          <router-link :to="{name : 'Register'}">  <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500"> register for free </a></router-link>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form class="mt-8 space-y-6" @submit="login">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
          <div class="mb-3 space-y-2 w-full text-xs">
             <label class="font-semibold text-gray-600 py-2">Email <abbr title="required">*</abbr></label>
-            <input placeholder="Email "
+            <input placeholder="Email " v-model="user.email"
                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                 required="required" type="email" name="integration[shop_name]" id="integration_shop_name">
             <p class="text-red text-xs hidden">Please fill out this field.</p>
         </div>
         <div class="mb-3 space-y-2 w-full text-xs">
             <label class="font-semibold text-gray-600 py-2">password <abbr title="required">*</abbr></label>
-            <input placeholder="password"
+            <input placeholder="password" v-model="user.pass"
                 class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4"
                 required="required" type="password" name="integration[shop_name]" id="integration_shop_name">
             <p class="text-red text-xs hidden">Please fill out this field.</p>
@@ -76,13 +76,29 @@
 
 </template>
 
-<script>
+<script setup>
 import { LockClosedIcon } from '@heroicons/vue/solid'
+import { useRouter } from 'vue-router';
+import store from "../store";
+import axios from "axios";
 
-export default {
-    name:"Login",
-  components: {
-    LockClosedIcon,
-  },
+const router = useRouter();
+const user = {
+    // id: "",
+    "email": "",
+    "pass": "",
+};
+
+
+function login(ev) {
+    ev.preventDefault();
+    store
+        .dispatch('login', user)
+        .then((response) => {
+            router.push({
+                name: 'HomePage'
+            })
+        })
+
 }
 </script>
