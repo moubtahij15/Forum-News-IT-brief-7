@@ -2,8 +2,9 @@
 import router from './router'
 import store from './store'
 import App from './App.vue'
-import './index.css'
+import axios from "axios";
 
+import './index.css'
 
 
 createApp(App)

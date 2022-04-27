@@ -25,6 +25,8 @@
   -->
 
     <div>
+        <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
+
         <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
             alt="Workflow" />
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Register for free</h2>
@@ -120,7 +122,7 @@ function register(ev) {
     ev.preventDefault();
     store
         .dispatch('register', user)
-        .then(() => {
+        .then((response) => {
             router.push({
                 name: 'HomePage'
             })

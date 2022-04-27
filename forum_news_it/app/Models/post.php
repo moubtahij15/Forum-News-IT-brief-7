@@ -16,4 +16,5 @@ class post extends Model
         'downvote',
         'date_post'
     ];
+
 }

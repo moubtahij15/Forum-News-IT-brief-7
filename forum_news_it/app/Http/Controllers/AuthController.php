@@ -6,6 +6,8 @@ use App\Models\utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use DateTime;
+
 
 class AuthController extends Controller
 {
@@ -16,7 +18,6 @@ class AuthController extends Controller
             'nom'=> 'required|String',
             'prenom'=> 'required|String',
             'date_naissance'=> 'required|Date',
-            'age'=> 'required|Integer',
             'email'=>'required|string|unique :utilisateurs,email',
             'pass'=>'required|string|confirmed'
         ]);
@@ -24,7 +25,7 @@ class AuthController extends Controller
             'nom'=> $fields['nom'],
             'prenom'=>$fields['prenom'],
             'date_naissance'=> $fields['date_naissance'],
-            'age'=>$fields['age'],
+            'age'=>$this->getAge($fields['date_naissance']),
             'email'=>$fields['email'],
             'pass'=>bcrypt($fields['pass'])
         ]);
@@ -82,5 +83,17 @@ class AuthController extends Controller
         ];
         
 
-    }  
+    } 
+     // function getAge 
+     public function  getAge($date_naissance){
+
+        $date = new DateTime($date_naissance);
+        $now = new DateTime();
+        $interval = $now->diff($date);
+        return $interval->y;
+       } 
+    
+ 
 }
+
+
