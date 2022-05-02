@@ -1,25 +1,19 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
-use App\Models\post;
-
 use Illuminate\Http\Request;
+use App\Models\comment;
+
 use PhpParser\Node\Stmt\Return_;
 use Illuminate\Support\Facades\DB;
 
-
-class PostController extends Controller
+class CommentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    //
     public function index()
     {
-        return post::all();
+        return comment::all();
     }
 
     /**
@@ -40,7 +34,7 @@ class PostController extends Controller
                 'date_post' => 'required'
             ]
         );
-        return post::create($request->all());
+        return comment::create($request->all());
     }
 
     /**
@@ -51,12 +45,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        return DB::table('posts')
-        ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
-        ->join('categories', 'posts.categorie_id', '=', 'categories.id')
-        ->where("utilisateurs.id", 'like',  $id)
-        ->select('*')
-        ->get();
+        return DB::table('comments')
+            ->join('utilisateurs', 'comments.utilisateur_id', '=', 'utilisateurs.id')
+            ->join('posts', 'comments.post_id', '=', 'posts.id')
+            ->where("utilisateurs.id", 'like',  $id)
+            ->select('*')
+            ->get();
     }
 
     /**
@@ -68,7 +62,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
+        $post = comment::find($id);
         $post->update($request->all());
         return $post;
     }
@@ -81,7 +75,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        return post::destroy(($id));
+        return comment::destroy(($id));
     }
     /**
      * search for a name 
@@ -91,7 +85,7 @@ class PostController extends Controller
      */
     public function search($name)
     {
-        return post::where("sjt_post", 'like', '%' . $name . '%')->get();
+        return comment::where("sjt_post", 'like', '%' . $name . '%')->get();
     }
 
     public function getAllPosts()
@@ -108,5 +102,4 @@ class PostController extends Controller
         // ->select('posts.id')
         // ->get();
     }
-    
 }

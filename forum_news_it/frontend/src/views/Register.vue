@@ -36,6 +36,7 @@
           {{ ' ' }} --> Or
             <router-link :to="{ name: 'Login' }"> <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
                     login to your account </a> </router-link>
+                    <!-- <h1  @click="redirectTo({ val: 'Login' })"> SBSDD</h1> -->
         </p>
     </div>
     <form class="mt-8 space-y-6" @submit="register">
@@ -109,6 +110,7 @@ import { LockClosedIcon } from '@heroicons/vue/solid'
 import { useRouter } from 'vue-router';
 import store from "../store";
 import axios from "axios";
+import { computed } from '@vue/reactivity';
 
 const router = useRouter();
 const user = {
@@ -120,15 +122,14 @@ const user = {
     "pass": "",
 };
 
-
 function register(ev) {
     ev.preventDefault();
     store
         .dispatch('register', user)
         .then((response) => {
-            router.push({
-                name: 'HomePage'
-            })
+            // router.push({
+            //     name: 'HomePage'
+            // })
         })
 
 }

@@ -39,7 +39,7 @@
                   <MenuButton
                     class="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                    <img class="h-8 w-8 rounded-full"  alt="" />
                   </MenuButton>
                 </div>
                 <transition enter-active-class="transition ease-out duration-100"
@@ -82,7 +82,7 @@
         <div class="pt-4 pb-3 border-t border-gray-700">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+              <img class="h-10 w-10 rounded-full"  alt="" />
             </div>
             <div class="ml-3">
               <div class="text-base font-medium leading-none text-white">{{ user.name }}</div>
@@ -115,17 +115,17 @@ import { computed } from '@vue/reactivity'
 import { useStore } from 'vuex'
 import {useRouter} from 'vue-router'
 // const user={}
-const user = {
-  id: "12",
-  name: "a",
-  nom: "othman",
-  prenom: "rrrt",
-  email: "aaaa",
-  date_naissance: "2201-01-01",
-  age: 12,
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-}
+// const user = {
+//   id: "12",
+//   name: "a",
+//   nom: "othman",
+//   prenom: "rrrt",
+//   email: "aaaa",
+//   date_naissance: "2201-01-01",
+//   age: 12,
+//   imageUrl:
+//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+// }
 const navigation = [
   { name: 'home', to: { name: "HomePage" } },
   { name: 'Profile', to: { name: "ProfileUser" } },
@@ -163,6 +163,7 @@ export default {
 
     }
     return {
+      
       user: computed(() => store.state.user.data),      
       navigation,
       logout,

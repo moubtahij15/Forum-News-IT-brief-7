@@ -77,10 +77,11 @@
 </template>
 
 <script setup>
+import { mapActions } from "vuex";
+
 import { LockClosedIcon } from '@heroicons/vue/solid'
 import { useRouter } from 'vue-router';
 import store from "../store";
-import axios from "axios";
 
 const router = useRouter();
 const user = {
@@ -90,15 +91,18 @@ const user = {
 };
 
 
+
 function login(ev) {
     ev.preventDefault();
     store
         .dispatch('login', user)
         .then((response) => {
             router.push({
-                name: 'HomePage'
-            })
+                name: "HomePage",
+            });
+            console.log(response);
         })
+
 
 }
 </script>

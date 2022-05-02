@@ -20,6 +20,11 @@ use Illuminate\Support\Facades\Route;
 // public routes 
 
 // Route::resource('post',PostController::class);
+//start comment
+
+Route::get('/comment/{id}', [CommentController::class, 'show']);
+
+// end comment
 
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -27,6 +32,9 @@ Route::get('/post', [PostController::class, 'index']);
 Route::get('/post/{id}', [PostController::class, 'show']);
 Route::get('/post/search/{name}', [PostController::class, 'search']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/getAllPosts', [PostController::class, 'getAllPosts']);
+
+
 Route::get('/token', function () {
     return csrf_token();
 });

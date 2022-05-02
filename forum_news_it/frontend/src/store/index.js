@@ -4,7 +4,11 @@ import { createStore } from "vuex";
 import axios from "axios";
 // import axiosClient from "../axios";
 import axiosClient from "../axios";
+import { useRouter } from 'vue-router';
+
+
 import { UserAddIcon } from "@heroicons/vue/solid";
+import router from "../router";
 
 
 
@@ -16,7 +20,7 @@ const store = createStore({
             data: {},
             token: sessionStorage.getItem("TOKEN"),
         },
-        id_RDV: "apaaah",
+
     },
     getters: {},
 
@@ -33,22 +37,39 @@ const store = createStore({
 
             return axiosClient.post('/login', user)
                 .then(response => {
-                    commit("setUser", response);
+                    commit('setUser', response.data.utilisateur);
+                    commit('setToken', response.data.token)
                     return response
                 });
         },
-        
+
+        redirectTo({ commit }, payload) {
+            // eslint-disable-next-line no-undef
+            commit("redirectTo", payload.val);
+        },
+
     },
     mutations: {
+        setUser: (state, user) => {
+            state.user.data = user;
+
+
+        },
+        setToken: (state, token) => {
+            state.user.token = token;
+            sessionStorage.setItem('TOKEN', token);
+        },
+        redirectTo(state, payload) {
+            router.push({ name: payload });
+        },
+
         logout: (state) => {
+
             state.user.data = {};
             state.user.token = null;
+            sessionStorage.clear();
         },
-        setUser: (state, userData) => {
-            state.user.token = userData.token;
-            state.user.data = userData.user;
-            sessionStorage.setItem('TOKEN', userData.token);
-        }
+
     },
     modules: {},
 
