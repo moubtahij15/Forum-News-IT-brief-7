@@ -43,12 +43,11 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id){ 
         return DB::table('comments')
             ->join('utilisateurs', 'comments.utilisateur_id', '=', 'utilisateurs.id')
             ->join('posts', 'comments.post_id', '=', 'posts.id')
-            ->where("utilisateurs.id", 'like',  $id)
+            ->where("posts.id", 'like',  $id)
             ->select('*')
             ->get();
     }
@@ -88,12 +87,12 @@ class CommentController extends Controller
         return comment::where("sjt_post", 'like', '%' . $name . '%')->get();
     }
 
-    public function getAllPosts()
+    public function getAllComments()
     {
 
-        return DB::table('posts')
-            ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
-            ->join('categories', 'posts.categorie_id', '=', 'categories.id')
+        return DB::table('comments')
+            ->join('utilisateurs', 'comments.utilisateur_id', '=', 'utilisateurs.id')
+            ->join('posts', 'comments.post_id', '=', 'posts.id')
             ->select('*')
             ->get();
         // return post::join

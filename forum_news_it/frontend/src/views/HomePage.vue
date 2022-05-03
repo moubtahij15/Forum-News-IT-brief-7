@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
 
-
+  <button @click="getAllPosts"> teeeeeest</button>
     <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
       <div class="container mx-auto px-6 py-8">
         <!-- <h3 class="text-gray-700 text-3xl font-medium">Dashboard</h3> -->
@@ -208,10 +208,40 @@
 <script>
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
-
+import { useRouter } from 'vue-router';
+import store from "../store";
 export default {
   name: "Dashboard",
 
+methods: {
+   getAllPosts() {
+    store
+        .dispatch('getAllPosts')
+        .then((response) => {
+          store
+        .dispatch('getAllComments')
+           
+            // console.log(response);
+                        // console.log();
 
+            //  response.forEach(obj => {
+            //             Object.entries(obj).forEach(([key, value]) => {
+            //                if( key =="id"){
+            //                console.log(value);
+
+
+            //                }
+            //             }); 
+            //             console.log("-----------------")});
+          console.log(store.state.post.data);
+                        // console.log(store.state);
+
+           
+
+        })
+
+
+}
+},
 }
 </script>

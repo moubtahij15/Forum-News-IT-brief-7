@@ -20,11 +20,21 @@ const store = createStore({
             data: {},
             token: sessionStorage.getItem("TOKEN"),
         },
+        post: {
+
+            data: {
+                //  info: {},
+
+
+            },
+
+        }
 
     },
     getters: {},
 
     actions: {
+
         register({ commit }, user) {
 
             return axiosClient.post('/register', user)
@@ -47,9 +57,99 @@ const store = createStore({
             // eslint-disable-next-line no-undef
             commit("redirectTo", payload.val);
         },
+        // get posts and his comments
+        getAllPosts({ commit }) {
+            let post = {};
+            return axiosClient.post('/getAllPosts')
+                .then(response => {
+                    // response.data.forEach(obj => {
+                    //     Object.entries(obj).forEach(([key, value]) => {
+                    //         console.log(`${key} ${value}`);
+                    //         if()
+
+                    //     }); });                    
+                    commit("setPosts", response.data);
+                    return response.data
+                });
+
+
+        },
+        getAllComments({ commit }) {
+            return axiosClient.get('/getAllComments')
+                .then(response => {
+                    // response.data.forEach(obj => {
+                    //     Object.entries(obj).forEach(([key, value]) => {
+                    //         console.log(`${key} ${value}`);
+                    //         if()
+
+                    //     }); });                    
+                    commit("setComments", response.data);
+                    return response.data
+                });
+
+
+
+        },
+
 
     },
     mutations: {
+        setPosts: (state, posts) => {
+            state.post.data = posts;
+            // state.post.comment= "fdfdddf";
+
+
+        },
+        setComments: (state, comments) => {
+            // comments.forEach(obj => {
+            //     Object.entries(obj).forEach(([key, value]) => {
+            //         // console.log(`${key} ${value}`);
+            //         if (key == "id") {
+            //             let i = state.post.data.findIndex(x => x.id == value)
+            //             if (i != -1) {
+            //                 let post = {};
+            //                 post = store.state.post.data[i];
+            //                 post["comments"] =  comments
+            //                 state.post.data[i] = post;
+
+            //             }
+            //         }
+
+            //     });
+
+            // });
+
+            for (let i = 0; i < comments.length; i++) {
+
+                let p = state.post.data.findIndex(x => x.id == comments[i].post_id)
+                // console.log(state.post.data.findIndex(x => x.id ==comments[i].post_id));
+                // console.log("----------");
+
+                if (p != -1) {
+                    let post = {};
+                    post=[post
+                    
+                    ];
+                    // post= store.state.post.data[p];
+
+                    post[0] = (comments[i]);
+                    post[1] = (comments[i]);
+                    state.post.data[p]['comments'] =post;
+                    state.post.data[p]['test'] ={};
+                    state.post.data[p]['test'] =comments[i];
+                    console.log(state.post.data[p]['comments'].Object.assign()
+                    );
+                    // console.log(Object.keys(state.post.data[p]['comments']));
+
+                    console.log("----------");
+
+                    // console.log(i);
+                }
+
+            }
+
+
+        },
         setUser: (state, user) => {
             state.user.data = user;
 

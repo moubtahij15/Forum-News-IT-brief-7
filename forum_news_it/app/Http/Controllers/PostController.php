@@ -96,11 +96,12 @@ class PostController extends Controller
 
     public function getAllPosts()
     {
-
         return DB::table('posts')
             ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
             ->join('categories', 'posts.categorie_id', '=', 'categories.id')
-            ->select('*')
+            // ->join('comments', 'posts.id', '=', 'comments.post_id',"left")
+            // ->select('*')
+            ->select("*","posts.id")
             ->get();
         // return post::join
         // ('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')

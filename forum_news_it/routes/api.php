@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route as RoutingRoute;
@@ -23,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 //start comment
 
 Route::get('/comment/{id}', [CommentController::class, 'show']);
+Route::get('/getAllComments', [CommentController::class, 'getAllComments']);
+
 
 // end comment
 
