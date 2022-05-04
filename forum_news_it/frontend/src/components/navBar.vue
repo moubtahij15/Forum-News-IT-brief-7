@@ -68,6 +68,7 @@
               <MenuIcon v-if="!open" class="block h-6 w-6" aria-hidden="true" />
               <XIcon v-else class="block h-6 w-6" aria-hidden="true" />
             </DisclosureButton>
+            
           </div>
         </div>
       </div>
@@ -100,6 +101,7 @@
              Sign out</DisclosureButton>
           </div>
         </div>
+
       </DisclosurePanel>
     </Disclosure>
 

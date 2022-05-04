@@ -110,9 +110,8 @@ const store = createStore({
             
                 if (p != -1) {
                     let post = {};
-                    
                     post = comments[i];
-                    state.post.data[p]['comments'][(state.post.data[p]['comments'].length)] = post;
+                    state.post.data[p]['comments'].push(post);
                   
                 }
             }
