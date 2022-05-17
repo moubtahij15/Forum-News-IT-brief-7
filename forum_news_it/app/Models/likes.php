@@ -8,19 +8,15 @@ use App\Models\utilisateur;
 use App\Models\post;
 
 
-class comment extends Model
+class likes extends Model
 {
     use HasFactory;
+    protected $fillable = [
 
-    protected $fillable=[
-        
         "post_id",
-        "sjt_comments"  ,
-        "utilisateur_id" 
+        "id",
+        "utilisateur_id"
     ];
-
-
-
     public function utilisateur()
     {
         return $this->belongsTo(utilisateur::class);

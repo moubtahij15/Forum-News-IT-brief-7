@@ -4,6 +4,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\post;
+use App\Models\utilisateur;
+use App\Models\comment;
+use App\Models\likes;
+use App\Models\dislikes;
+
+
 
 use Illuminate\Http\Request;
 use PhpParser\Node\Stmt\Return_;
@@ -19,7 +25,19 @@ class PostController extends Controller
      */
     public function index()
     {
-        return post::all();
+
+
+        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes')->get();
+
+        foreach ($posts as $post) {
+            foreach ($post->comments as $comment) {
+                $comment->setAttribute('user', utilisateur::find($comment->utilisateur_id));
+            }
+        }
+
+        return response(array(
+            'posts' => $posts
+        ), 200);
     }
 
     /**
@@ -52,11 +70,11 @@ class PostController extends Controller
     public function show($id)
     {
         return DB::table('posts')
-        ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
-        ->join('categories', 'posts.categorie_id', '=', 'categories.id')
-        ->where("utilisateurs.id", 'like',  $id)
-        ->select('*')
-        ->get();
+            ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
+            ->join('categories', 'posts.categorie_id', '=', 'categories.id')
+            ->where("utilisateurs.id", 'like',  $id)
+            ->select('*')
+            ->get();
     }
 
     /**
@@ -100,8 +118,8 @@ class PostController extends Controller
             ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
             ->join('categories', 'posts.categorie_id', '=', 'categories.id')
             // ->join('comments', 'posts.id', '=', 'comments.post_id',"left")
-            // ->select('*')
-            ->select("*","posts.id")
+            // ->select('*')    
+            ->select("*", "posts.id")
             ->get();
         // return post::join
         // ('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
@@ -109,5 +127,26 @@ class PostController extends Controller
         // ->select('posts.id')
         // ->get();
     }
-    
+    //likes
+    public function likes(Request $request)
+    {
+
+        return Likes::create($request->all());
+    }
+    public function destroyLike($id)
+    {
+        return likes::destroy(($id));
+    }
+
+
+    // dilikes
+    public function dislikes(Request $request)
+    {
+
+        return Dislikes::create($request->all());
+    }
+    public function destroydisLike($id)
+    {
+        return dislikes::destroy(($id));
+    }
 }

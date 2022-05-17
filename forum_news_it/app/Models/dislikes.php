@@ -2,24 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\utilisateur;
 use App\Models\post;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class comment extends Model
+class dislikes extends Model
 {
     use HasFactory;
+    protected $fillable = [
 
-    protected $fillable=[
-        
         "post_id",
-        "sjt_comments"  ,
-        "utilisateur_id" 
+        "id",
+        "utilisateur_id"
     ];
-
-
 
     public function utilisateur()
     {

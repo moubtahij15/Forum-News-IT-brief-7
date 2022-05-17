@@ -26,12 +26,10 @@ class CommentController extends Controller
     {
         $request->validate(
             [
-                'sjt_post' => 'required',
-                'upvote' => 'required',
-                'categorie_id' => 'required',
+                'post_id' => 'required',
+                'sjt_comments' => 'required',
                 'utilisateur_id' => 'required',
-                'downvote' => 'required',
-                'date_post' => 'required'
+               
             ]
         );
         return comment::create($request->all());
@@ -101,4 +99,5 @@ class CommentController extends Controller
         // ->select('posts.id')
         // ->get();
     }
+    
 }

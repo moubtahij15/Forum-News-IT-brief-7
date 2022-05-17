@@ -37,6 +37,11 @@ Route::get('/post/search/{name}', [PostController::class, 'search']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/getAllPosts', [PostController::class, 'getAllPosts']);
 
+Route::post('/post/like', [PostController::class, 'likes']);
+Route::post('/post/dislike', [PostController::class, 'dislikes']);
+Route::delete('post/like/{id}', [PostController::class, 'destroyLike']);
+Route::delete('post/dislike/{id}', [PostController::class, 'destroydisLike']);
+
 
 Route::get('/token', function () {
     return csrf_token();
@@ -47,7 +52,9 @@ Route::get('/token', function () {
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
+   
     Route::post('/post', [PostController::class, 'store']);
+    Route::post('/comment', [CommentController::class, 'store']);
     Route::put('/post/{id}', [PostController::class, 'update']);
     Route::delete('/post/{id}', [PostController::class, 'destroy']);
 

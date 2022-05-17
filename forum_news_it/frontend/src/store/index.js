@@ -19,12 +19,12 @@ const store = createStore({
         user: {
             data: {},
             token: sessionStorage.getItem("TOKEN"),
+            id: sessionStorage.getItem("idUser"),
         },
         post: {
 
             data: {
-                //  info: {},
-
+                //  info: {}
 
             },
 
@@ -52,6 +52,51 @@ const store = createStore({
                     return response
                 });
         },
+        // add comment
+        comments({ commit }, comment) {
+
+            return axiosClient.post('/comment', comment)
+                .then(response => {
+
+                    return response
+                });
+        },
+        //add like
+        like({ commit }, like) {
+
+            return axiosClient.post('/post/like', like)
+                .then(response => {
+
+                    return response
+                });
+        },
+        //destroy Like
+        destroyLike({ commit }, like) {
+
+            return axiosClient.post('/post/like/{id}', like)
+                .then(response => {
+
+                    return response
+                });
+        },
+        // add dislike 
+        like({ commit }, like) {
+
+            return axiosClient.post('/post/like', like)
+                .then(response => {
+
+                    return response
+                });
+        },
+        // destroy dislike
+        destroyLike({ commit }, like) {
+
+            return axiosClient.post('/post/dislike/{id}', like)
+                .then(response => {
+
+                    return response
+                });
+        },
 
         redirectTo({ commit }, payload) {
             // eslint-disable-next-line no-undef
@@ -60,7 +105,9 @@ const store = createStore({
         // get posts and his comments
         getAllPosts({ commit }) {
             let post = {};
-            return axiosClient.post('/getAllPosts')
+
+
+            return axiosClient.get('/post')
                 .then(response => {
                     // response.data.forEach(obj => {
                     //     Object.entries(obj).forEach(([key, value]) => {
@@ -69,6 +116,7 @@ const store = createStore({
 
                     //     }); });                    
                     commit("setPosts", response.data);
+                    // console.log(response.data.posts);
                     return response.data
                 });
 
@@ -83,7 +131,7 @@ const store = createStore({
                     //         if()
 
                     //     }); });                    
-                    commit("setComments", response.data);
+                    // commit("setComments", response.data);
                     return response.data
                 });
 
@@ -101,25 +149,27 @@ const store = createStore({
 
         },
         setComments: (state, comments) => {
-            
-            for (let i = 0; i < state.post.data.length; i++) {
-                state.post.data[i]['comments'] = [];
-            }
-            for (let i = 0; i < comments.length; i++) {
-                let p = state.post.data.findIndex(x => x.id == comments[i].post_id)
-            
-                if (p != -1) {
-                    let post = {};
-                    post = comments[i];
-                    state.post.data[p]['comments'].push(post);
-                  
-                }
-            }
+
+            // for (let i = 0; i < state.post.data.length; i++) {
+            //     state.post.data[i]['comments'] = [];
+            // }
+            // for (let i = 0; i < comments.length; i++) {
+            //     let p = state.post.data.findIndex(x => x.id == comments[i].post_id)
+
+            //     if (p != -1) {
+            //         let post = {};
+            //         post = comments[i];
+            //         state.post.data[p]['comments'].push(post);
+
+            //     }
+            // }
 
 
         },
         setUser: (state, user) => {
             state.user.data = user;
+            state.user.id = user.id;
+            sessionStorage.setItem('idUser', state.user.id);
 
 
         },

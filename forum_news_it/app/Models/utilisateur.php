@@ -8,6 +8,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\utilisateur as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\post;
+use App\Models\comment;
+
 
 
 class utilisateur extends Model
@@ -28,6 +31,19 @@ class utilisateur extends Model
         'age',
         'pass',
     ];
-
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+    public function comments()
+    {
+        return $this->belongsTo(comment::class);
+    }
+  
+    public function utilisateur()
+    {
+        return $this->belongsTo(utilisateur::class);
+    }
+    
 
 }
