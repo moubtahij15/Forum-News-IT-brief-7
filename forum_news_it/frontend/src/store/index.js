@@ -71,27 +71,27 @@ const store = createStore({
                 });
         },
         //destroy Like
-        destroyLike({ commit }, like) {
+        destroyLike({ commit }, idPost) {
 
-            return axiosClient.post('/post/like/{id}', like)
+            return axiosClient.delete('/post/like/'+idPost)
                 .then(response => {
 
                     return response
                 });
         },
         // add dislike 
-        like({ commit }, like) {
+        dislike({ commit }, like) {
 
-            return axiosClient.post('/post/like', like)
+            return axiosClient.post('/post/dislike', like)
                 .then(response => {
 
                     return response
                 });
         },
         // destroy dislike
-        destroyLike({ commit }, like) {
+        destroyDisLike({ commit }, idPost) {
 
-            return axiosClient.post('/post/dislike/{id}', like)
+            return axiosClient.post('/post/dislike/'+idPost)
                 .then(response => {
 
                     return response
