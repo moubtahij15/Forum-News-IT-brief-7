@@ -139,8 +139,8 @@
           <!-- like² -->
 
           <div id="likes" class="flex items-center	gap-3" @click="setLike(elem)">
-            <FIcons v-if="isLiked(elem)" :icon="['fas', 'heart']" />
-            <FIcons v-else :icon="['far', 'heart']" />
+            <FIcons v-if="isLiked(elem)" :icon="['fas', 'heart']" class="h-5 w-5" />
+            <FIcons v-else :icon="['far', 'heart']" class="h-5 w-5" />
             <div class="text-sm"> {{ elem.likes.length }} Likes</div>
           </div>
           <div>
@@ -152,10 +152,10 @@
 
           </div>
         </div>
-        <div id="dislike" class="flex items-center	gap-3">
-         
-         <BanIcon class="h-6 w-6" />
+        <div id="dislike" class="flex items-center	gap-3" @click="setDislikeLike(elem)">
 
+          <FIcons v-if="isDisLiked(elem)" :icon="['fas', 'thumbs-down']" class="h-5 w-5" />
+          <FIcons v-else :icon="['far', 'thumbs-down']" class="h-5 w-5" />
 
           <div class="text-sm">{{ elem.dislikes.length }} Dislikes</div>
         </div>
@@ -228,7 +228,7 @@ export default {
 
       },
       likeId: "",
-      dislikesId:""
+      dislikesId: ""
     };
   },
 
@@ -262,7 +262,7 @@ export default {
       store
         .dispatch('comments', this.comment)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
 
           // store
           //   .dispatch('getAllComments')
@@ -279,7 +279,7 @@ export default {
       // console.log(elem);  
     },
     isLiked(post) {
-                console.log(post);
+      // console.log(post);
 
       for (var elem in post.likes) {
         // console.log(post.likes[elem].utilisateur_id);
@@ -294,8 +294,8 @@ export default {
 
     },
     // for like
-    setLike(post) {
-      console.log("ok");
+    async setLike(post) {
+      // console.log("ok");
 
       this.dataLikePost.post_id = post.id;
       //  console.log(this.comment);
@@ -303,12 +303,15 @@ export default {
         store
           .dispatch('like', this.dataLikePost)
           .then((response) => {
-            console.log(response)
+            // console.log(response)
 
             // store
             //   .dispatch('getAllComments')
-            console.log(response);
             // this.comment.sjt_comments = "";
+            if (this.isDisLiked(post)) {
+               this.setDislikeLike(post)
+
+            }
 
             this.getAllPosts();
 
@@ -321,13 +324,11 @@ export default {
         store
           .dispatch('destroyLike', this.likeId)
           .then((response) => {
-            console.log(response)
 
             // store
             //   .dispatch('getAllComments')
-            console.log(response);
+            // console.log(response);
             // this.comment.sjt_comments = "";
-
             this.getAllPosts();
 
 
@@ -353,22 +354,22 @@ export default {
 
     },
     // for like
-    setDislikeLike(post) {
+    async setDislikeLike(post) {
       // console.log("ok");
 
       this.dataLikePost.post_id = post.id;
       //  console.log(this.comment);
       if (!this.isDisLiked(post)) {
         store
-          .dispatch('dislikes', this.dataLikePost)
+          .dispatch('dislike', this.dataLikePost)
           .then((response) => {
-            console.log(response)
 
-            // store
-            //   .dispatch('getAllComments')
-            console.log(response);
-            // this.comment.sjt_comments = "";
+            
+             if (this.isLiked(post)) {
+               this.setLike(post)
 
+            }
+            // this.setLike(post)
             this.getAllPosts();
 
 
@@ -380,11 +381,10 @@ export default {
         store
           .dispatch('destroyDisLike', this.dislikesId)
           .then((response) => {
-            console.log(response)
 
             // store
             //   .dispatch('getAllComments')
-            console.log(response);
+            // console.log(response);
             // this.comment.sjt_comments = "";
 
             this.getAllPosts();
@@ -412,6 +412,7 @@ export default {
   cursor: pointer;
 
 }
+
 #dislike {
   cursor: pointer;
 

@@ -19,7 +19,9 @@ class VerifyCsrfToken extends Middleware
                "http://127.0.0.1:8000/api/getAllComments",
                "http://127.0.0.1:8000/api/comment",
                "http://127.0.0.1:8000/api/post/like",
-               "http://127.0.0.1:8000/api/post/like/*"
+               "http://127.0.0.1:8000/api/post/like/*" ,
+               "http://127.0.0.1:8000/api/post/dislike",
+               "http://127.0.0.1:8000/api/post/dislike/*"
                
     ];
 }

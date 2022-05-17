@@ -91,7 +91,7 @@ const store = createStore({
         // destroy dislike
         destroyDisLike({ commit }, idPost) {
 
-            return axiosClient.post('/post/dislike/'+idPost)
+            return axiosClient.delete('/post/dislike/'+idPost)
                 .then(response => {
 
                     return response
