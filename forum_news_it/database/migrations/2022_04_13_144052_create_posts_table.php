@@ -17,13 +17,13 @@ return new class extends Migration
             // $table->foreignId('id_categorie')->constrained("categorie")->nullable();
             $table->id()->autoIncrement();
             $table->String("sjt_post");
-            $table->integer("upvote")->default(0);
+            $table->integer("upvote")->default(0)->nullable();;
             // $table->String('reff_util');
 
             $table->foreignId('categorie_id')->constrained();
             $table->foreignId('utilisateur_id')->constrained();
-            $table->integer("downvote")->default(0);
-            $table->date("date_post");
+            $table->integer("downvote")->default(0)->nullable();;
+            $table->date("date_post")->nullable();;
 
 
             // $table->foreign('reff_util')->references('reff_uti')->on('posts');
