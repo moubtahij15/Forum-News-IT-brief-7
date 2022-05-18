@@ -17,8 +17,10 @@
 
     <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md ">
       <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
-      <button v-for="elem in $store.state.categorie.data" :key="elem.id"  class="inline-block border border-teal-500 text-teal-500 rounded-full px-6 py-2 mr-4">{{ elem.nom_categorie }} </button>
-      
+      <button v-for="elem in $store.state.categorie.data" :key="elem.id"
+        class="inline-block border border-teal-500 text-teal-500 rounded-full px-6 py-2 mr-4"
+        @click="getAllPostsByCategorie(elem.id)">{{ elem.nom_categorie }} </button>
+
 
     </div>
 
@@ -248,7 +250,8 @@ export default {
 
       },
       likeId: "",
-      dislikesId: ""
+      dislikesId: "",
+      testCate:true
     };
   },
 
@@ -260,6 +263,7 @@ export default {
   },
   post: {},
   methods: {
+    // get all posts
     getAllPosts() {
       store
         .dispatch('getAllPosts')
@@ -274,6 +278,8 @@ export default {
 
 
     },
+    // get all gategorie
+
     setCategories() {
       store
         .dispatch('getAllCategories')
@@ -287,6 +293,7 @@ export default {
         })
 
     },
+    // set comment
     setComment(elem) {
       // console.log(store.state.user.data);  
       this.comment.utilisateur_id = sessionStorage.getItem("idUser");
@@ -311,6 +318,8 @@ export default {
 
       // console.log(elem);  
     },
+    // for like
+
     isLiked(post) {
       // console.log(post);
 
@@ -326,7 +335,6 @@ export default {
       }
 
     },
-    // for like
     async setLike(post) {
       // console.log("ok");
 
@@ -386,7 +394,7 @@ export default {
       }
 
     },
-    // for like
+
     async setDislikeLike(post) {
       // console.log("ok");
 
@@ -430,11 +438,26 @@ export default {
       }
     },
 
+
+    getAllPostsByCategorie(elem) {
+      this.testCate=false;
+      // console.log(elem);
+      store
+        .dispatch('getAllPostsByCategorie', elem)
+        .then((response) => {
+          // console.log(response)
+
+        })
+    }
+
   },
 
   mounted() {
     // this.post = store.state.post.data;
+    if(this.testCate){
     this.getAllPosts();
+
+    }
     this.setCategories();
   },
 

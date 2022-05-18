@@ -157,6 +157,25 @@ const store = createStore({
 
 
         },
+        // get all posts by  categories
+
+        getAllPostsByCategorie({ commit }, id) {
+                console.log(id)
+            return axiosClient.get('/post/categorie/'+id)
+                .then(response => {
+                    // response.data.forEach(obj => {
+                    //     Object.entries(obj).forEach(([key, value]) => {
+                    //         console.log(`${key} ${value}`);
+                    //         if()
+
+                    //     }); });    
+                    console.log(response.data)
+
+                    commit("setPosts", response.data);
+                    // console.log(response.data.posts);
+                    return response.data
+                });
+        }
 
 
     },
@@ -194,7 +213,7 @@ const store = createStore({
         },
         setCategories: (state, categorie) => {
             state.categorie.data = categorie;
-            
+
 
         },
 
