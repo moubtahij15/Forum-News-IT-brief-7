@@ -160,8 +160,8 @@ const store = createStore({
         // get all posts by  categories
 
         getAllPostsByCategorie({ commit }, id) {
-                console.log(id)
-            return axiosClient.get('/post/categorie/'+id)
+            console.log(id)
+            return axiosClient.get('/post/categorie/' + id)
                 .then(response => {
                     // response.data.forEach(obj => {
                     //     Object.entries(obj).forEach(([key, value]) => {
@@ -175,17 +175,28 @@ const store = createStore({
                     // console.log(response.data.posts);
                     return response.data
                 });
+        },
+
+        // add post
+
+        addPost({ commit }, post) {
+            return axiosClient.post('/post', post)
+                .then(response => {
+                console.log(response.data)
+
+                commit("setPosts", response.data);
+
+            });
         }
+
+    },
+mutations: {
+    setPosts: (state, posts) => {
+        state.post.data = posts;
+        // state.post.comment= "fdfdddf";
 
 
     },
-    mutations: {
-        setPosts: (state, posts) => {
-            state.post.data = posts;
-            // state.post.comment= "fdfdddf";
-
-
-        },
         setComments: (state, comments) => {
 
             // for (let i = 0; i < state.post.data.length; i++) {
@@ -204,36 +215,36 @@ const store = createStore({
 
 
         },
-        setUser: (state, user) => {
-            state.user.data = user;
-            state.user.id = user.id;
-            sessionStorage.setItem('idUser', state.user.id);
+            setUser: (state, user) => {
+                state.user.data = user;
+                state.user.id = user.id;
+                sessionStorage.setItem('idUser', state.user.id);
 
 
-        },
-        setCategories: (state, categorie) => {
-            state.categorie.data = categorie;
+            },
+                setCategories: (state, categorie) => {
+                    state.categorie.data = categorie;
 
 
-        },
+                },
 
-        setToken: (state, token) => {
-            state.user.token = token;
-            sessionStorage.setItem('TOKEN', token);
-        },
-        redirectTo(state, payload) {
-            router.push({ name: payload });
-        },
+                    setToken: (state, token) => {
+                        state.user.token = token;
+                        sessionStorage.setItem('TOKEN', token);
+                    },
+                        redirectTo(state, payload) {
+        router.push({ name: payload });
+    },
 
-        logout: (state) => {
+    logout: (state) => {
 
-            state.user.data = {};
-            state.user.token = null;
-            sessionStorage.clear();
-        },
+        state.user.data = {};
+        state.user.token = null;
+        sessionStorage.clear();
+    },
 
     },
-    modules: {},
+modules: { },
 
 
 })
