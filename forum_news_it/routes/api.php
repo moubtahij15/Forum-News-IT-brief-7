@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\categorieController;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
@@ -32,8 +33,10 @@ Route::get('/getAllComments', [CommentController::class, 'getAllComments']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/post', [PostController::class, 'index']);
+Route::get('/categorie', [categorieController::class, 'index']);
 Route::get('/post/{id}', [PostController::class, 'show']);
 Route::get('/post/search/{name}', [PostController::class, 'search']);
+Route::get('post/categorie/{id}', [PostController::class, 'postsByCategorie']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/getAllPosts', [PostController::class, 'getAllPosts']);
 

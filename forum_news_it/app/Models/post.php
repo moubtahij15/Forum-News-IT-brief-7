@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Models;
+
 use App\Models\utilisateur;
 use App\Models\comment;
 use App\Models\likes;
 use App\Models\dislikes;
+use App\Models\categorie;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -12,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 class post extends Model
 {
     use HasFactory;
-    protected $fillable=[
+    protected $fillable = [
         'sjt_post',
         'upvote',
         'categorie_id',
@@ -21,22 +24,29 @@ class post extends Model
         'date_post'
     ];
 
+    public function categorie()
+    {
+        return $this->belongsTo(categorie::class);
+    }
     public function utilisateur()
     {
         return $this->belongsTo(utilisateur::class);
-        
-    }   
-    
+    }
+
+
+
     public function comments()
     {
-        return $this->hasMany(Comment::class)   ;
+        return $this->hasMany(Comment::class);
     }
     public function likes()
     {
         return $this->hasMany(Likes::class);
-    } public function dislikes()
+    }
+    public function dislikes()
+
+
     {
         return $this->hasMany(Dislikes::class);
     }
-    
 }

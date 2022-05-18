@@ -27,7 +27,7 @@ class PostController extends Controller
     {
 
 
-        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes')->get();
+        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes', "categorie")->get();
 
         foreach ($posts as $post) {
             foreach ($post->comments as $comment) {
@@ -148,5 +148,19 @@ class PostController extends Controller
     public function destroydisLike($id)
     {
         return dislikes::destroy(($id));
+    }
+    public function postsByCategorie($id)
+    {
+        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes', "categorie")->where("categorie_id", 'like',  $id )->get();
+
+        foreach ($posts as $post) {
+            foreach ($post->comments as $comment) {
+                $comment->setAttribute('user', utilisateur::find($comment->utilisateur_id));
+            }
+        }
+
+        return response(array(
+            'posts' => $posts
+        ), 200);
     }
 }

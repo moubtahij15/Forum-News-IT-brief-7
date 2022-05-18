@@ -2,7 +2,7 @@
 <template>
 
 
-  <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100">
+  <main class=" overflow-x-hidden overflow-y-auto bg-gray-100">
 
     <!-- <button @click="getAllPosts"> teeeeeest</button> -->
     <!-- <div class="container mx-auto px-6 py-8"> -->
@@ -12,97 +12,101 @@
     <!-- posts -->
 
     <!--middle wall-->
-    <div class="relative inline-flex">
-  <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 412 232"><path d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z" fill="#648299" fill-rule="nonzero"/></svg>
-  <select class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-    <option>Choose a color</option>
-    <option>Red</option>
-    <option>Blue</option>
-    <option>Yellow</option>
-    <option>Black</option>
-    <option>Orange</option>
-    <option>Purple</option>
-    <option>Gray</option>
-    <option>White</option>
-  </select>
-</div>  
-    <div class="border mx-auto max-w-screen-md bg-white mt-6 rounded-2xl p-4">
-      <div class="flex">
-        <div class="flex-1 m-2">
-          <h2 class="px-4 py-2 text-xl font-semibold text-black">Home</h2>
-        </div>
-        <div class="flex-1 px-4 py-2 m-2">
-        </div>
-      </div>
-      <hr class="border-gray-600">
-      <!--middle creat tweet-->
-      <div class="flex">
-        <div class="m-2 w-10 py-1">
-          <img class="inline-block h-10 w-10 rounded-full"
-            src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
-        </div>
-        <div class="flex-1 px-2 pt-2 mt-2">
-          <textarea class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50"
-            placeholder="What's happening?"></textarea>
-        </div>
-      </div>
-      <!--middle creat tweet below icons-->
-      <div class="flex">
-        <div class="w-10"></div>
-        <div class="w-64 px-2">
-          <div class="flex items-center">
-            <div class="flex-1 text-center px-1 py-1 m-2">
-              <a href="#"
-                class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                  </path>
-                </svg>
-              </a>
-            </div>
-            <div class="flex-1 text-center py-2 m-2">
-              <a href="#"
-                class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
-                  </path>
-                  <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </a>
-            </div>
-            <div class="flex-1 text-center py-2 m-2">
-              <a href="#"
-                class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                  </path>
-                </svg>
-              </a>
-            </div>
-            <div class="flex-1 text-center py-2 m-2">
-              <a href="#"
-                class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
-                <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                  </path>
-                </svg>
-              </a>
-            </div>
+
+
+
+    <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md ">
+      <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
+      <button v-for="elem in $store.state.categorie.data" :key="elem.id"  class="inline-block border border-teal-500 text-teal-500 rounded-full px-6 py-2 mr-4">{{ elem.nom_categorie }} </button>
+      
+
+    </div>
+
+
+    <div class="flex  items-stretch	    ">
+
+      <!-- add post -->
+      <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md">
+
+        <div class="flex">
+
+          <div class="flex-1 m-2">
+            <h2 class="px-4 py-2 text-xl font-semibold text-black">Home</h2>
+          </div>
+          <div class="flex-1 px-4 py-2 m-2">
           </div>
         </div>
-        <div class="flex-1">
-          <button
-            class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
-            post
-          </button>
+        <hr class="border-gray-600">
+        <!--middle creat tweet-->
+        <div class="flex">
+          <div class="m-2 w-10 py-1">
+            <img class="inline-block h-10 w-10 rounded-full"
+              src="https://pbs.twimg.com/profile_images/1121328878142853120/e-rpjoJi_bigger.png" alt="" />
+          </div>
+          <div class="flex-1 px-2 pt-2 mt-2">
+            <textarea class=" bg-transparent text-gray-400 font-medium text-lg w-full" rows="2" cols="50"
+              placeholder="What's happening?"></textarea>
+          </div>
+        </div>
+        <!--middle creat tweet below icons-->
+        <div class="flex">
+          <div class="w-10"></div>
+          <div class="w-64 px-2">
+            <div class="flex items-center">
+              <div class="flex-1 text-center px-1 py-1 m-2">
+                <a href="#"
+                  class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                  <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+              <div class="flex-1 text-center py-2 m-2">
+                <a href="#"
+                  class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                  <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z">
+                    </path>
+                    <path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </a>
+              </div>
+              <div class="flex-1 text-center py-2 m-2">
+                <a href="#"
+                  class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                  <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+              <div class="flex-1 text-center py-2 m-2">
+                <a href="#"
+                  class="mt-1 group flex items-center text-blue-400 px-2 py-2 text-base leading-6 font-medium rounded-full hover:bg-blue-800 hover:text-blue-300">
+                  <svg class="text-center h-7 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                    </path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="flex-1">
+            <button
+              class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
+              post
+            </button>
+          </div>
         </div>
       </div>
+
     </div>
 
 
@@ -111,7 +115,7 @@
 
     <!-- </div>  -->
     <!-- post -->
-    <div class="border mx-auto max-w-screen-md bg-white mt-6 rounded-2xl p-4"
+    <div class="border     mx-auto max-w-screen-md bg-white mt-10 rounded-2xl p-4"
       v-for="elem in $store.state.post.data.posts" :key="elem.id">
       <div class="flex items-center	justify-between">
         <div class="gap-3.5	flex items-center ">
@@ -119,7 +123,7 @@
             src="https://images.unsplash.com/photo-1617077644557-64be144aa306?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
             class="object-cover bg-yellow-500 rounded-full w-10 h-10" />
           <div class="flex flex-col">
-            <b class="mb-2 capitalize"> {{ elem.prenom }} {{ elem.nom }}</b>
+            <b class="mb-2 capitalize"> {{ elem.utilisateur.prenom }} {{ elem.utilisateur.nom }}</b>
             <time datetime={{elem.date_post}} class="text-gray-400 text-xs">{{ elem.date_post }}
             </time>
           </div>
@@ -203,7 +207,7 @@
           <img class="rounded-full h-8 w-8  mt-1 " src="https://picsum.photos/id/1027/200/200" />
           <div>
             <div class="bg-gray-100   dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-              <div class="font-semibold text-sm leading-relaxed">{{ ele.prenom }} {{ ele.nom }}</div>
+              <div class="font-semibold text-sm leading-relaxed">{{ ele.user.prenom }} {{ ele.user.nom }}</div>
               <div class="text-normal leading-snug md:leading-normal"> {{ ele.sjt_comments }}</div>
             </div>
             <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
@@ -217,6 +221,7 @@
 
   </main>
 
+  <!-- component -->
 
 </template>
 
@@ -267,6 +272,19 @@ export default {
 
         })
 
+
+    },
+    setCategories() {
+      store
+        .dispatch('getAllCategories')
+        .then((response) => {
+          // store
+          //   .dispatch('getAllComments')
+          // console.log(response);
+
+          // console.log(store.state.post.data);
+
+        })
 
     },
     setComment(elem) {
@@ -324,7 +342,7 @@ export default {
             //   .dispatch('getAllComments')
             // this.comment.sjt_comments = "";
             if (this.isDisLiked(post)) {
-               this.setDislikeLike(post)
+              this.setDislikeLike(post)
 
             }
 
@@ -379,9 +397,9 @@ export default {
           .dispatch('dislike', this.dataLikePost)
           .then((response) => {
 
-            
-             if (this.isLiked(post)) {
-               this.setLike(post)
+
+            if (this.isLiked(post)) {
+              this.setLike(post)
 
             }
             // this.setLike(post)
@@ -417,6 +435,7 @@ export default {
   mounted() {
     // this.post = store.state.post.data;
     this.getAllPosts();
+    this.setCategories();
   },
 
 }

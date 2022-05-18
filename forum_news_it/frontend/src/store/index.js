@@ -25,10 +25,16 @@ const store = createStore({
 
             data: {
                 //  info: {}
-
             },
 
-        }
+        },
+        categorie: {
+            data: {
+                //  info: {}
+            },
+
+        },
+
 
     },
     getters: {},
@@ -73,7 +79,7 @@ const store = createStore({
         //destroy Like
         destroyLike({ commit }, idPost) {
 
-            return axiosClient.delete('/post/like/'+idPost)
+            return axiosClient.delete('/post/like/' + idPost)
                 .then(response => {
 
                     return response
@@ -91,7 +97,7 @@ const store = createStore({
         // destroy dislike
         destroyDisLike({ commit }, idPost) {
 
-            return axiosClient.delete('/post/dislike/'+idPost)
+            return axiosClient.delete('/post/dislike/' + idPost)
                 .then(response => {
 
                     return response
@@ -139,6 +145,19 @@ const store = createStore({
 
         },
 
+        // get all categories
+        getAllCategories({ commit }) {
+            return axiosClient.get('/categorie')
+                .then(response => {
+                    commit('setCategories', response.data);
+
+                    return response.data
+                });
+
+
+
+        },
+
 
     },
     mutations: {
@@ -173,6 +192,12 @@ const store = createStore({
 
 
         },
+        setCategories: (state, categorie) => {
+            state.categorie.data = categorie;
+            
+
+        },
+
         setToken: (state, token) => {
             state.user.token = token;
             sessionStorage.setItem('TOKEN', token);
