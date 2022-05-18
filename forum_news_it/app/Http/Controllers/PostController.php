@@ -51,11 +51,11 @@ class PostController extends Controller
         $request->validate(
             [
                 'sjt_post' => 'required',
-                'upvote' => 'required',
+                'upvote' => '',
                 'categorie_id' => 'required',
                 'utilisateur_id' => 'required',
-                'downvote' => 'required',
-                'date_post' => 'required'
+                'downvote' => '',
+                'date_post' => ''
             ]
         );
         return post::create($request->all());

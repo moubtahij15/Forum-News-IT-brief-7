@@ -50,6 +50,17 @@
               placeholder="What's happening?"></textarea>
           </div>
         </div>
+        <!-- //categorie Post -->
+        <div class=" flex-1 px-2 pt-2 mx-10 m-2">
+
+          <select
+            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+            <option>Choose a categorie</option>
+            <option>Red</option>
+            <option>Blue</option>
+
+          </select>
+        </div>
         <!--middle creat tweet below icons-->
         <div class="flex">
           <div class="w-10"></div>
@@ -99,7 +110,9 @@
                 </a>
               </div>
             </div>
+
           </div>
+
           <div class="flex-1">
             <button
               class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right">
@@ -249,9 +262,14 @@ export default {
         "utilisateur_id": sessionStorage.getItem("idUser"),
 
       },
+      postData: {
+        "utilisateur_id": sessionStorage.getItem("idUser"),
+        "categorie_id":"",
+        "sjt_post":""
+      },
       likeId: "",
       dislikesId: "",
-      testCate:true
+      testCate: true
     };
   },
 
@@ -440,7 +458,7 @@ export default {
 
 
     getAllPostsByCategorie(elem) {
-      this.testCate=false;
+      this.testCate = false;
       // console.log(elem);
       store
         .dispatch('getAllPostsByCategorie', elem)
@@ -454,8 +472,8 @@ export default {
 
   mounted() {
     // this.post = store.state.post.data;
-    if(this.testCate){
-    this.getAllPosts();
+    if (this.testCate) {
+      this.getAllPosts();
 
     }
     this.setCategories();
