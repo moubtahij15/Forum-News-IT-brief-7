@@ -124,7 +124,8 @@
 
             <div class="flex-1">
               <button type="submit"
-                class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right" @click="addPost">
+                class="bg-blue-400 mt-5 hover:bg-blue-600 text-white font-bold py-2 px-8 rounded-full mr-8 float-right"
+                @click="addPost">
                 post
               </button>
             </div>
@@ -483,7 +484,9 @@ export default {
 
         })
     },
-    addPost() {
+    async addPost() {
+      sessionStorage.removeItem("userInfo");
+
       store
         .dispatch('addPost', this.postData)
         .then((response) => {
@@ -492,7 +495,7 @@ export default {
           // store
           //   .dispatch('getAllComments')
           console.log(response);
-        this.postData.sjt_post="";
+          this.postData.sjt_post = "";
           this.getAllPosts();
 
 

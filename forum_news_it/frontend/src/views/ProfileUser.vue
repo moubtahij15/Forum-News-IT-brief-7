@@ -135,6 +135,7 @@ export default {
   data() {
     return {
       test: "zeez",
+      
       user: {
         "id": sessionStorage.getItem("idUser"),
         "nom": "",
@@ -148,7 +149,7 @@ export default {
   },
   methods: {
     getInfoUser() {
-      console.log(store.state.user.data.id);
+      // console.log(store.state.user.data.id);
       // console.log(sessionStorage.getItem("userInfo").length);
       // console.log('retrievedObject: ' ,JSON.parse(store.state.user.data));
       this.user.prenom = store.state.user.data.nom;
@@ -158,6 +159,7 @@ export default {
       // this.user.prenom=store.state.user.data.nom;
     },
     updateUser() {
+      // console.log(this.user)
       store
         .dispatch('updateUser', this.user)
         .then((response) => {
@@ -172,6 +174,7 @@ export default {
           // console.log(store.state.post.data);
 
         })
+      // sessionStorage.getItem("userInfo").clear();
 
     }
 

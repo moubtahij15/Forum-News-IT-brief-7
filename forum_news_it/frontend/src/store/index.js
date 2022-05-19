@@ -187,18 +187,27 @@ const store = createStore({
                     commit("setPosts", response.data);
 
                 });
-        },  
+        },
 
         // update user info
         updateUser({ commit }, user) {
 
-            return axiosClient.put('/user/' + user.id, user)
+            return axiosClient.put('/user/' + user.id, {
+                "id": user.id,
+                "nom": user.nom,
+                "prenom": user.prenom,
+                "date_naissance":user.date_naissance,
+                "email": user.email,
+            })
                 .then(response => {
                     console.log(response.data)
 
+
                     commit("setUser", response.data);
 
-                })
+                    return response;
+
+                });
         }
 
     },
