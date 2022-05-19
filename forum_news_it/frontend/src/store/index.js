@@ -187,6 +187,18 @@ const store = createStore({
                     commit("setPosts", response.data);
 
                 });
+        },  
+
+        // update user info
+        updateUser({ commit }, user) {
+
+            return axiosClient.put('/user/' + user.id, user)
+                .then(response => {
+                    console.log(response.data)
+
+                    commit("setUser", response.data);
+
+                })
         }
 
     },

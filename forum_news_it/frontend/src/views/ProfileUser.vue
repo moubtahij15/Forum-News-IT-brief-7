@@ -104,7 +104,7 @@
 
               </div>
             </div>
-            <button
+            <button @click="updateUser()"
               class="block w-full text-blue-800 text-sm font-semibold rounded-lg hover:bg-gray-100 focus:outline-none focus:shadow-outline focus:bg-gray-100 hover:shadow-xs p-3 my-4">Update
             </button>
           </div>
@@ -136,7 +136,7 @@ export default {
     return {
       test: "zeez",
       user: {
-        // id: "",
+        "id": sessionStorage.getItem("idUser"),
         "nom": "",
         "prenom": "",
         "date_naissance": "",
@@ -156,7 +156,25 @@ export default {
       this.user.email = store.state.user.data.email;
       this.user.date_naissance = store.state.user.data.date_naissance;
       // this.user.prenom=store.state.user.data.nom;
+    },
+    updateUser() {
+      store
+        .dispatch('updateUser', this.user)
+        .then((response) => {
+          // console.log(response)
+
+          // store
+          //   .dispatch('getAllComments')
+          console.log(response);
+          
+
+
+          // console.log(store.state.post.data);
+
+        })
+
     }
+
 
   },
   mounted() {

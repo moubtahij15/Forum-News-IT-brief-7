@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\categorieController;
 
 use App\Http\Controllers\PostController;
@@ -30,6 +31,7 @@ Route::get('/getAllComments', [CommentController::class, 'getAllComments']);
 
 // end comment
 
+Route::put('/user/{id}', [AuthController::class, 'update']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/post', [PostController::class, 'index']);
@@ -55,7 +57,7 @@ Route::get('/token', function () {
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
-   
+
     Route::post('/post', [PostController::class, 'store']);
     Route::post('/comment', [CommentController::class, 'store']);
     Route::put('/post/{id}', [PostController::class, 'update']);

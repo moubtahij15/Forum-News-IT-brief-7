@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     //
 
-    
+
     public function register(Request $request)
     {
 
@@ -86,8 +86,8 @@ class AuthController extends Controller
         ];
     }
 
-    public function test($id){
-
+    public function test($id)
+    {
     }
     // function getAge 
     public function  getAge($date_naissance)
@@ -97,5 +97,13 @@ class AuthController extends Controller
         $now = new DateTime();
         $interval = $now->diff($date);
         return $interval->y;
+    }
+
+    // update user info 
+    public function update(Request $request, $id)
+    {
+        $user = utilisateur::find($id);
+        $user->update($request->all());
+        return $user;
     }
 }

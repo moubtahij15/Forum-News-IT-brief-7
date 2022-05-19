@@ -12,18 +12,19 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-               "http://127.0.0.1:8000/api/register",
-               "http://127.0.0.1:8000/api/login",
-               "http://127.0.0.1:8000/api/getAllPosts",
-               "http://127.0.0.1:8000/api/post",
-               "http://127.0.0.1:8000/api/getAllComments",
-               "http://127.0.0.1:8000/api/comment",
-               "http://127.0.0.1:8000/api/post/like",
-               "http://127.0.0.1:8000/api/post/like/*" ,
-               "http://127.0.0.1:8000/api/post/dislike",
-               "http://127.0.0.1:8000/api/post/dislike/*",
-               "http://127.0.0.1:8000/api/categorie/",   
-               "http://127.0.0.1:8000/api/post/categorie/*"   
-               
+        "http://127.0.0.1:8000/api/register",
+        "http://127.0.0.1:8000/api/login",
+        "http://127.0.0.1:8000/api/getAllPosts",
+        "http://127.0.0.1:8000/api/post",
+        "http://127.0.0.1:8000/api/getAllComments",
+        "http://127.0.0.1:8000/api/comment",
+        "http://127.0.0.1:8000/api/post/like",
+        "http://127.0.0.1:8000/api/post/like/*",
+        "http://127.0.0.1:8000/api/post/dislike",
+        "http://127.0.0.1:8000/api/post/dislike/*",
+        "http://127.0.0.1:8000/api/categorie/",
+        "http://127.0.0.1:8000/api/post/categorie/*",
+        "http://127.0.0.1:8000/api/user/*"
+
     ];
 }
