@@ -67,25 +67,25 @@
               <div class="grid md:grid-cols-2 text-sm">
                 <div class="grid grid-cols-2  mt-4 ">
                   <div class="px-4 py-2 font-semibold">Prenom</div>
-                  <input placeholder="prenom" v-model="user.prenom"
+                  <input v-model="user.prenom" placeholder="prenom"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold">Nom</div>
-                  <input placeholder="Nom"
+                  <input placeholder="Nom" v-model="user.nom"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold">email</div>
-                  <input placeholder="Email "
+                  <input placeholder="Email " v-model="user.email"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 py-2"
                     required="required" type="email" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold"> date de naissance</div>
-                  <input placeholder="date de naissance"
+                  <input placeholder="date de naissance" v-model="user.date_naissance"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                 </div>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="grid grid-cols-2 mt-4 ">
                   <div class="px-4 py-2 font-semibold">new password</div>
-                  <input placeholder="new password"
+                  <input placeholder="new password" v-model="user.pass"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="password" name="integration[shop_name]" id="integration_shop_name">
                 </div>
@@ -127,13 +127,15 @@
 
 <script>
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+import store from "../store";
 
 
 export default {
   name: "test",
   data() {
     return {
-       user : {
+      test: "zeez",
+      user: {
         // id: "",
         "nom": "",
         "prenom": "",
@@ -144,6 +146,23 @@ export default {
 
     }
   },
+  methods: {
+    getInfoUser() {
+      console.log(store.state.user.data.id);
+      // console.log(sessionStorage.getItem("userInfo").length);
+      // console.log('retrievedObject: ' ,JSON.parse(store.state.user.data));
+      this.user.prenom = store.state.user.data.nom;
+      this.user.nom = store.state.user.data.nom;
+      this.user.email = store.state.user.data.email;
+      this.user.date_naissance = store.state.user.data.date_naissance;
+      // this.user.prenom=store.state.user.data.nom;
+    }
+
+  },
+  mounted() {
+
+    this.getInfoUser();
+  }
 }
 </script>
  <style>
