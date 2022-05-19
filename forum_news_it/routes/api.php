@@ -32,6 +32,7 @@ Route::get('/getAllComments', [CommentController::class, 'getAllComments']);
 // end comment
 
 Route::put('/user/{id}', [AuthController::class, 'update']);
+Route::get('/user/{id}', [AuthController::class, 'show']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/post', [PostController::class, 'index']);

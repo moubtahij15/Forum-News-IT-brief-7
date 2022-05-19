@@ -17,7 +17,7 @@ const store = createStore({
     state: {
 
         user: {
-            data: JSON.parse(sessionStorage.getItem("userInfo")),
+            data:{},
             token: sessionStorage.getItem("TOKEN"),
             id: sessionStorage.getItem("idUser"),
         },
@@ -188,7 +188,20 @@ const store = createStore({
 
                 });
         },
+        // get info user
+        getInfoUser({ commit }, id) {
+            return axiosClient.get('/user/'+id)
+                .then(response => {
+                    // console.log(response.data)
 
+
+                    commit("setUser", response.data);
+
+                    return response;
+
+                });
+
+        },
         // update user info
         updateUser({ commit }, user) {
 
@@ -196,14 +209,14 @@ const store = createStore({
                 "id": user.id,
                 "nom": user.nom,
                 "prenom": user.prenom,
-                "date_naissance":user.date_naissance,
+                "date_naissance": user.date_naissance,
                 "email": user.email,
             })
                 .then(response => {
                     console.log(response.data)
 
 
-                    commit("setUser", response.data);
+                    // commit("setUser", response.data);
 
                     return response;
 
@@ -240,8 +253,8 @@ const store = createStore({
             state.user.data = user;
             state.user.id = user.id;
             sessionStorage.setItem('idUser', state.user.id);
-            sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
-            sessionStorage.setItem('userInfos', "state.user.data");
+            // sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
+            // sessionStorage.setItem('userInfos', "state.user.data");
 
 
         },

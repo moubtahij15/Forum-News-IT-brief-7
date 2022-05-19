@@ -106,4 +106,10 @@ class AuthController extends Controller
         $user->update($request->all());
         return $user;
     }
+
+    //  find user info
+    public function show($id)
+    {
+        return  utilisateur::find($id);;
+    }
 }

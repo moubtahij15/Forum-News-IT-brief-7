@@ -22,13 +22,10 @@
           <div class="bg-white p-3 border-t-4 border-green-400">
             <div class="image overflow-hidden">
               <img class="h-auto w-full mx-auto"
-                src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg" alt="">
+                src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-101-e1485815933252-400x382.jpg" alt="">
             </div>
             <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
-            <h3 class="text-gray-600 font-lg text-semibold leading-6">Owner at Her Company Inc.</h3>
-            <p class="text-sm text-gray-500 hover:text-gray-600 leading-6">Lorem ipsum dolor sit amet
-              consectetur adipisicing elit.
-              Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt</p>
+            
             <ul
               class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
               <li class="flex items-center py-3">
@@ -38,7 +35,7 @@
               </li>
               <li class="flex items-center py-3">
                 <span>Member since</span>
-                <span class="ml-auto">Nov 07, 2016</span>
+                <span class="ml-auto">{{user.created_at}}</span>
               </li>
             </ul>
           </div>
@@ -135,7 +132,7 @@ export default {
   data() {
     return {
       test: "zeez",
-      
+
       user: {
         "id": sessionStorage.getItem("idUser"),
         "nom": "",
@@ -149,13 +146,26 @@ export default {
   },
   methods: {
     getInfoUser() {
-      // console.log(store.state.user.data.id);
+      console.log(this.user.id);
       // console.log(sessionStorage.getItem("userInfo").length);
       // console.log('retrievedObject: ' ,JSON.parse(store.state.user.data));
       this.user.prenom = store.state.user.data.nom;
       this.user.nom = store.state.user.data.nom;
       this.user.email = store.state.user.data.email;
       this.user.date_naissance = store.state.user.data.date_naissance;
+      store
+        .dispatch('getInfoUser', this.user.id)
+        .then((response) => {
+          // console.log(response)
+          console.log(response);
+        this.user=response.data;
+          // store
+          //   .dispatch('getAllComments')
+          // console.log(response);
+
+          this.user.pass="";
+
+        })
       // this.user.prenom=store.state.user.data.nom;
     },
     updateUser() {
@@ -168,7 +178,7 @@ export default {
           // store
           //   .dispatch('getAllComments')
           console.log(response);
-          
+
 
 
           // console.log(store.state.post.data);
