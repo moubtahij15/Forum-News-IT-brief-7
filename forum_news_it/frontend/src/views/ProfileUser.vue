@@ -113,8 +113,20 @@
 
           <!-- post  -->
           <div class=" p-3 shadow-sm rounded-sm  bg-gray-100">
+            
             <div class="border bg-gray-100    mx-auto max-w-screen-md bg-white mt-10 rounded-2xl p-4"
               v-for="elem in $store.state.post.data.posts" :key="elem.id">
+              <div class=" mx-auto px-2 pt-2  m-2 flex	items-center justify-center">
+
+            <select v-model="postData.categorie_id" required
+              class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+              <option selected>   </option>
+              <option :value=elem.id v-for="elem in $store.state.categorie.data" :key="elem.id">{{ elem.nom_categorie }}
+              </option>
+
+            </select>
+          </div>
+
               <div class="flex items-center	justify-between">
                 <div class="gap-3.5	flex items-center ">
                   <img
@@ -122,22 +134,26 @@
                     class="object-cover bg-yellow-500 rounded-full w-10 h-10" />
                   <div class="flex flex-col">
                     <b class="mb-2 capitalize"> {{ elem.utilisateur.prenom }} {{ elem.utilisateur.nom }}</b>
-                    <time datetime={{elem.date_post}} class="text-gray-400 text-xs">{{ elem.date_post }}
+                    <time datetime={{elem.utilisateur.created_at}} class="text-gray-400 text-xs">{{
+                        elem.utilisateur.created_at
+                    }}
                     </time>
                   </div>
                 </div>
-                <div class="bg-gray-100	rounded-full h-3.5 flex	items-center justify-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="34px" fill="#92929D">
-                    <path d="M0 0h24v24H0V0z" fill="none" />
-                    <path
-                      d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-                  </svg>
+                <div class="	rounded-full h-3.5 flex	items-center justify-center">
+                  <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
+
                 </div>
               </div>
 
-              <div class="whitespace-pre-wrap mt-7"> <input v-model="elem.sjt_post" placeholder="prenom"
-                    class="bg-purple-white shadow rounded border-0 p-3 w-full"
-                    required="required" type="text" name="integration[shop_name]" id="integration_shop_name"></div>
+              <div class="whitespace-pre-wrap mt-7"> <textarea v-model="elem.sjt_post" placeholder="prenom"
+                  class="bg-purple-white shadow rounded border-0 p-3 w-full" required="required"
+                  name="integration[shop_name]" id="integration_shop_name"></textarea>
+
+                <input type='submit'
+                  class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
+                  value='update post' @click="setComment(elem)">
+              </div>
 
               <!-- <div class="whitespace-pre-wrap mt-7">{{ elem.sjt_post }}</div> -->
               <!-- <div class="mt-5 flex gap-2	 justify-center border-b pb-4 flex-wrap	">
@@ -186,29 +202,13 @@
 
               <!-- comment -->
               <!-- post a comment -->
-              <div
-                class="relative flex items-center self-center w-full max-w-xxl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
-                <img class='w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar'
-                  src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200'>
-                <span class="absolute inset-y-0 right-0 flex items-center pr-6">
 
-                </span>
-
-                <input type="search"
-                  class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
-                  style="border-radius: 25px" placeholder="Post a comment..." autocomplete="off"
-                  v-model="comment.sjt_comments">
-                <div class="-mr-1">
-                  <input type='submit'
-                    class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
-                    value='Post Comment' @click="setComment(elem)">
-                </div>
-              </div>
 
               <!-- comments recent -->
               <div class="flex  bg-white dark:bg-gray-800" v-for="ele in elem.comments" :key="ele.id">
-                <div class="bg-white dark:bg-gray-800 text-black  dark:text-gray-200 p-4 antialiased flex max-w-lg">
-                  
+                <div
+                  class="bg-white dark:bg-gray-800 text-black  dark:text-gray-200 p-4 antialiased flex max-w-lg flex-auto">
+
                   <img class="rounded-full h-8 w-8  mt-1 " src="https://picsum.photos/id/1027/200/200" />
                   <div>
                     <div class="bg-gray-100   dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
@@ -219,6 +219,9 @@
 
                   </div>
                 </div>
+                <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5 mt-6"
+                  @click="deleteComment(ele.id_comment)" />
+
 
               </div>
 
@@ -413,7 +416,7 @@ export default {
     },
     getAllPosts() {
       store
-        .dispatch('postByUser',this.user.id)
+        .dispatch('postByUser', this.user.id)
         .then((response) => {
           // store
           //   .dispatch('getAllComments')
@@ -486,10 +489,29 @@ export default {
 
     },
 
+    // delete comment
+    deleteComment(id) {
+      // console.log(id);
+      store
+        .dispatch('deleteComment', id)
+        .then((response) => {
 
-    getAllposts() {
+          this.getAllPosts();
 
-    }
+        })
+    },
+    // delete post
+    deletePost(id) {
+      console.log(id);
+      store
+        .dispatch('deletePost', id)
+        .then((response) => {
+
+          this.getAllPosts();
+
+        })
+    },
+
   },
   mounted() {
     // 
@@ -514,5 +536,9 @@ export default {
 
 .border-main-color {
   border-color: var(--main-color);
+}
+
+#delete {
+  cursor: pointer;
 }
 </style>

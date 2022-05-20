@@ -29,7 +29,7 @@ class CommentController extends Controller
                 'post_id' => 'required',
                 'sjt_comments' => 'required',
                 'utilisateur_id' => 'required',
-               
+
             ]
         );
         return comment::create($request->all());
@@ -41,7 +41,8 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id){ 
+    public function show($id)
+    {
         return DB::table('comments')
             ->join('utilisateurs', 'comments.utilisateur_id', '=', 'utilisateurs.id')
             ->join('posts', 'comments.post_id', '=', 'posts.id')
@@ -72,7 +73,7 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        return comment::destroy(($id));
+        return comment::where("id_comment", "like", $id)->delete();
     }
     /**
      * search for a name 
@@ -99,5 +100,4 @@ class CommentController extends Controller
         // ->select('posts.id')
         // ->get();
     }
-    
 }

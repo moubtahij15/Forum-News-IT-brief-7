@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer("upvote")->default(0)->nullable();;
             // $table->String('reff_util');
 
-            $table->foreignId('categorie_id')->constrained();
-            $table->foreignId('utilisateur_id')->constrained();
+            $table->foreignId('categorie_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade');;
             $table->integer("downvote")->default(0)->nullable();;
             $table->date("date_post")->nullable();;
 

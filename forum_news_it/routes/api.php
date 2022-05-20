@@ -57,6 +57,7 @@ Route::get('/token', function () {
 
 
 // protected routes
+Route::delete('/comment/{id}', [CommentController::class, 'destroy']);
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {

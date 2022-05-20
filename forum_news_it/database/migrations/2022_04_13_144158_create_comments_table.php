@@ -17,8 +17,8 @@ return new class extends Migration
             $table->increments('id_comment');
             // $table->Integer("user_id")->primary()->autoIncrement();
             $table->String("sjt_comments");
-            $table->foreignId('utilisateur_id')->constrained();
-            $table->foreignId('post_id')->constrained();
+            $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');;
 
             // $table->foreignId('post')->constrained();
             // $table->Integer("id_post");

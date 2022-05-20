@@ -234,14 +234,37 @@ const store = createStore({
                 .then(response => {
                     commit("setPosts", response.data);
 
-                        console.log(response.data);
+                    console.log(response.data);
+                    return response.data;
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        },
+        //delete comment
+        deleteComment({ commit }, id) {
+            return axiosClient.delete('/comment/' + id)
+                .then(response => {
+
+                    console.log(response.data)
+                    return response.data;
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        },
+        deletePost({ commit }, id) {
+         
+            return axiosClient.delete('/post/' + id)
+                .then(response => {
+
+                    console.log(response.data)
                     return response.data;
 
                 }).catch(function (error) {
                     console.log(error);
                 });
         }
-
 
     },
     mutations: {

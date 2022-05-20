@@ -16,6 +16,7 @@ class VerifyCsrfToken extends Middleware
         "http://127.0.0.1:8000/api/login",
         "http://127.0.0.1:8000/api/getAllPosts",
         "http://127.0.0.1:8000/api/post",
+        "http://127.0.0.1:8000/api/post/*",
         "http://127.0.0.1:8000/api/getAllComments",
         "http://127.0.0.1:8000/api/comment",
         "http://127.0.0.1:8000/api/post/like",
@@ -26,7 +27,9 @@ class VerifyCsrfToken extends Middleware
         "http://127.0.0.1:8000/api/post/categorie/*",
         "http://127.0.0.1:8000/api/user/*",
         "http://127.0.0.1:8000/api/testPass/*",
-        "http://127.0.0.1:8000/api/post/user/*"
+        "http://127.0.0.1:8000/api/post/user/*",
+        "http://127.0.0.1:8000/api/comment/*"
+
 
 
     ];

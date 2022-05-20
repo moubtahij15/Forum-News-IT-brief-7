@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->increments('id_media');
             $table->String("contenu_media");
-            $table->foreignId('post_id')->constrained();
+            $table->foreignId('post_id')->constrained()->onDelete('cascade');;
             
             $table->timestamps();
         });
