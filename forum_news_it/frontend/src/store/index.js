@@ -214,7 +214,7 @@ const store = createStore({
                 });
         },
         // test Old password
-        testPass(user) {
+        testPass({ commit },user) {
 
 
             // axiosClient.post('/user', {
@@ -224,12 +224,13 @@ const store = createStore({
             //     .then(function (response) {
             //         console.log(response);
             //     })
-this.commit
-            return axiosClient.post('/testPass/'+3, {
-                pass: "user.pass.old"
+                    // console.log(user);
+
+            return axiosClient.post('/testPass/' + user.id, {
+                pass: user.pass.old
             })
                 .then(response => {
-                    console.log(response.data)
+                    // console.log(response.data)
 
 
                     // commit("setUser", response.data);

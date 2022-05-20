@@ -177,40 +177,41 @@ export default {
       // this.user.prenom=store.state.user.data.nom;
     },
     updateUser() {
-      console.log(this.user.pass.old)
-      store
-        .dispatch('testPass', this.user)
-        .then((response) => {
-          // console.log(response)
-        })
+      // console.log(this.user.pass.old)
+      var test = "";
+      if (this.user.pass.old != "" && this.user.pass.new != "") {
+        // test if old password correct
+        store
+          .dispatch('testPass', this.user)
+          .then((response) => {
+            // console.log(response)
+            if (response.message == "sucess") {
+              this.user.info.pass = this.user.pass.new;
+              store
+                .dispatch('updateUser', this.user)
+                .then((response) => {
+                  console.log("Bien updated")
+                  this.user.pass.new = "";
+                  this.user.pass.old = "";
+                })
+
+            } else {
+              console.log("ereur mdp")
+            };
+
+          })
 
 
-      // console.log(this.user.info.pass in this.user.info)
-      //   if (this.user.info.pass in this.user.info) {
-      //     if (this.user.info.pass == "") {
-      //       console.log(delete this.user.info.pass);
+      } else if (this.user.pass.old == "" && this.user.pass.new == "") {
+        store
+          .dispatch('updateUser', this.user)
+          .then((response) => {
+            console.log("Bien updated")
 
-      //     }
-
-      //   }
-      // store
-      //   .dispatch('updateUser', this.user)
-      //   .then((response) => {
-      //     // console.log(response)
-
-      //     // store
-      //     //   .dispatch('getAllComments')
-      //     console.log(response);
-
-
-
-      //     // console.log(store.state.post.data);
-
-      //   })
-      // sessionStorage.getItem("userInfo").clear();
+          })
+      }
 
     }
-
 
   },
   mounted() {
