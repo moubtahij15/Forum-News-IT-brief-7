@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use DateTime;
-
+use Illuminate\Validation\Rules\Exists;
 
 class AuthController extends Controller
 {
@@ -102,14 +102,64 @@ class AuthController extends Controller
     // update user info 
     public function update(Request $request, $id)
     {
+
+        // $fields = $request->validate([
+        //     'nom' => 'required|String',
+        //     'prenom' => 'required|String',
+        //     'date_naissance' => 'required|Date',
+        //     'email' => 'required|string|unique :utilisateurs,email',
+        //     'pass' => 'required|string'
+        // ]);
+        // $utilisateur = utilisateur::create([
+        //     'nom' => $fields['nom'],
+        //     'prenom' => $fields['prenom'],
+        //     'date_naissance' => $fields['date_naissance'],
+        //     'age' => $this->getAge($fields['date_naissance']),
+        //     'email' => $fields['email'],
+        //     'pass' => bcrypt($fields['pass'])
+        // ]);
+        $fields = $request->all();
+        if (isset($fields['pass'])) {
+            $fields['pass'] = bcrypt($fields['pass']);
+        }
         $user = utilisateur::find($id);
-        $user->update($request->all());
+
+
+        $user->update($fields);
+
         return $user;
     }
 
     //  find user info
     public function show($id)
     {
-        return  utilisateur::find($id);;
+        return  utilisateur::find($id);
+    }
+
+    //test old pass
+
+    public function testPass(Request $request)
+    {
+
+        $fields = $request->validate([
+
+            'id' => 'required',
+            'pass' => 'required'
+        ]);
+        // check email
+        $utilisateur = utilisateur::where('id', $fields['id'])->first();
+        // check password
+        if (!$utilisateur || !Hash::check($fields['pass'], $utilisateur->pass)) {
+
+            return response([
+                'message' => 'Bad creds'
+            ], 401);
+        }
+
+        $response = [
+            'message'=>"sucess",
+            'utilisateur' => $utilisateur,
+        ];
+        return response($response, 201);
     }
 }

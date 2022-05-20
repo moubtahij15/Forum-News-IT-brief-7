@@ -24,7 +24,9 @@ class VerifyCsrfToken extends Middleware
         "http://127.0.0.1:8000/api/post/dislike/*",
         "http://127.0.0.1:8000/api/categorie/",
         "http://127.0.0.1:8000/api/post/categorie/*",
-        "http://127.0.0.1:8000/api/user/*"
+        "http://127.0.0.1:8000/api/user/*",
+        "http://127.0.0.1:8000/api/testPass"
+
 
     ];
 }
