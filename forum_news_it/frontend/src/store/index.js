@@ -17,7 +17,7 @@ const store = createStore({
     state: {
 
         user: {
-            data:{},
+            data: {},
             token: sessionStorage.getItem("TOKEN"),
             id: sessionStorage.getItem("idUser"),
         },
@@ -190,7 +190,7 @@ const store = createStore({
         },
         // get info user
         getInfoUser({ commit }, id) {
-            return axiosClient.get('/user/'+id)
+            return axiosClient.get('/user/' + id)
                 .then(response => {
                     // console.log(response.data)
 
@@ -205,12 +205,28 @@ const store = createStore({
         // update user info
         updateUser({ commit }, user) {
 
-            return axiosClient.put('/user/' + user.id, {
-                "id": user.id,
-                "nom": user.nom,
-                "prenom": user.prenom,
-                "date_naissance": user.date_naissance,
-                "email": user.email,
+            return axiosClient.put('/user/' + user.id, user.info)
+                .then(response => {
+                    console.log(response.data)
+                    // commit("setUser", response.data);
+                    return response;
+
+                });
+        },
+        // test Old password
+        testPass(user) {
+
+
+            // axiosClient.post('/user', {
+            //     id: 'Fred',
+            //     pass: 'Flintstone'
+            // })
+            //     .then(function (response) {
+            //         console.log(response);
+            //     })
+this.commit
+            return axiosClient.post('/testPass/'+3, {
+                pass: "user.pass.old"
             })
                 .then(response => {
                     console.log(response.data)
@@ -218,11 +234,13 @@ const store = createStore({
 
                     // commit("setUser", response.data);
 
-                    return response;
+                    return response.data;
 
+                }).catch(function (error) {
+                    // console.log(error);
                 });
         }
-        
+
 
     },
     mutations: {

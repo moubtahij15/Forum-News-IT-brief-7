@@ -25,7 +25,7 @@
                 src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg" alt="">
             </div>
             <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">Jane Doe</h1>
-            
+
             <ul
               class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
               <li class="flex items-center py-3">
@@ -35,7 +35,7 @@
               </li>
               <li class="flex items-center py-3">
                 <span>Member since</span>
-                <span class="ml-auto">{{user.created_at}}</span>
+                <span class="ml-auto">{{ user.created_at }}</span>
               </li>
             </ul>
           </div>
@@ -64,37 +64,37 @@
               <div class="grid md:grid-cols-2 text-sm">
                 <div class="grid grid-cols-2  mt-4 ">
                   <div class="px-4 py-2 font-semibold">Prenom</div>
-                  <input v-model="user.prenom" placeholder="prenom"
+                  <input v-model="user.info.prenom" placeholder="prenom"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold">Nom</div>
-                  <input placeholder="Nom" v-model="user.nom"
+                  <input placeholder="Nom" v-model="user.info.nom"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold">email</div>
-                  <input placeholder="Email " v-model="user.email"
+                  <input placeholder="Email " v-model="user.info.email"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-4 py-2"
                     required="required" type="email" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold"> date de naissance</div>
-                  <input placeholder="date de naissance" v-model="user.date_naissance"
+                  <input placeholder="date de naissance" v-model="user.info.date_naissance"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="text" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4">
                   <div class="px-4 py-2 font-semibold"> old password</div>
-                  <input placeholder="old password"
+                  <input placeholder="old password" v-model="user.pass.old"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="password" name="integration[shop_name]" id="integration_shop_name">
                 </div>
                 <div class="grid grid-cols-2 mt-4 ">
                   <div class="px-4 py-2 font-semibold">new password</div>
-                  <input placeholder="new password" v-model="user.pass"
+                  <input placeholder="new password" v-model="user.pass.new"
                     class="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded-lg h-10 px-3  py-2"
                     required="required" type="password" name="integration[shop_name]" id="integration_shop_name">
                 </div>
@@ -131,16 +131,23 @@ export default {
   name: "test",
   data() {
     return {
-      test: "zeez",
 
       user: {
-        "id": sessionStorage.getItem("idUser"),
-        "nom": "",
-        "prenom": "",
-        "date_naissance": "",
-        "email": "",
-        "pass": "",
+        info: {
+          "nom": "",
+          "prenom": "",
+          "date_naissance": "",
+          "email": "",
+          "pass": "",
+        },
+        id: sessionStorage.getItem("idUser"),
+        pass: {
+          "old": "",
+          "new": "",
+
+        }
       }
+
 
     }
   },
@@ -158,9 +165,9 @@ export default {
         .then((response) => {
           // console.log(response)
           console.log(response);
-          
-        this.user=response.data;
-        this.user.pass="";          // store
+
+          this.user.info = response.data;
+          // this.user.pass = "";          // store
           //   .dispatch('getAllComments')
           // console.log(response);
 
@@ -170,21 +177,36 @@ export default {
       // this.user.prenom=store.state.user.data.nom;
     },
     updateUser() {
-      // console.log(this.user)
+      console.log(this.user.pass.old)
       store
-        .dispatch('updateUser', this.user)
+        .dispatch('testPass', this.user)
         .then((response) => {
           // console.log(response)
-
-          // store
-          //   .dispatch('getAllComments')
-          console.log(response);
-
-
-
-          // console.log(store.state.post.data);
-
         })
+
+
+      // console.log(this.user.info.pass in this.user.info)
+      //   if (this.user.info.pass in this.user.info) {
+      //     if (this.user.info.pass == "") {
+      //       console.log(delete this.user.info.pass);
+
+      //     }
+
+      //   }
+      // store
+      //   .dispatch('updateUser', this.user)
+      //   .then((response) => {
+      //     // console.log(response)
+
+      //     // store
+      //     //   .dispatch('getAllComments')
+      //     console.log(response);
+
+
+
+      //     // console.log(store.state.post.data);
+
+      //   })
       // sessionStorage.getItem("userInfo").clear();
 
     }
@@ -192,8 +214,9 @@ export default {
 
   },
   mounted() {
-
+    // 
     this.getInfoUser();
+    // console.log(this.user.info)
   }
 }
 </script>

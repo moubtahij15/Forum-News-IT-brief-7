@@ -119,6 +119,9 @@ class AuthController extends Controller
         //     'pass' => bcrypt($fields['pass'])
         // ]);
         $fields = $request->all();
+
+
+        
         if (isset($fields['pass'])) {
             $fields['pass'] = bcrypt($fields['pass']);
         }
@@ -138,22 +141,21 @@ class AuthController extends Controller
 
     //test old pass
 
-    public function testPass(Request $request)
+    public function testPass(Request $request,$id)
     {
 
         $fields = $request->validate([
 
-            'id' => 'required',
             'pass' => 'required'
         ]);
         // check email
-        $utilisateur = utilisateur::where('id', $fields['id'])->first();
+        $utilisateur = utilisateur::where('id',$id)->first();
         // check password
         if (!$utilisateur || !Hash::check($fields['pass'], $utilisateur->pass)) {
 
             return response([
                 'message' => 'Bad creds'
-            ], 401);
+            ], 200);
         }
 
         $response = [
