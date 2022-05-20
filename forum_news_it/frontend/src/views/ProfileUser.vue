@@ -134,7 +134,12 @@
                   </svg>
                 </div>
               </div>
-              <div class="whitespace-pre-wrap mt-7">{{ elem.sjt_post }}</div>
+
+              <div class="whitespace-pre-wrap mt-7"> <input v-model="elem.sjt_post" placeholder="prenom"
+                    class="bg-purple-white shadow rounded border-0 p-3 w-full"
+                    required="required" type="text" name="integration[shop_name]" id="integration_shop_name"></div>
+
+              <!-- <div class="whitespace-pre-wrap mt-7">{{ elem.sjt_post }}</div> -->
               <!-- <div class="mt-5 flex gap-2	 justify-center border-b pb-4 flex-wrap	">
         <img
           src="https://images.unsplash.com/photo-1610147323479-a7fb11ffd5dd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
@@ -203,6 +208,7 @@
               <!-- comments recent -->
               <div class="flex  bg-white dark:bg-gray-800" v-for="ele in elem.comments" :key="ele.id">
                 <div class="bg-white dark:bg-gray-800 text-black  dark:text-gray-200 p-4 antialiased flex max-w-lg">
+                  
                   <img class="rounded-full h-8 w-8  mt-1 " src="https://picsum.photos/id/1027/200/200" />
                   <div>
                     <div class="bg-gray-100   dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
@@ -407,7 +413,7 @@ export default {
     },
     getAllPosts() {
       store
-        .dispatch('getAllPosts')
+        .dispatch('postByUser',this.user.id)
         .then((response) => {
           // store
           //   .dispatch('getAllComments')

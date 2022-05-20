@@ -112,20 +112,19 @@ class PostController extends Controller
         return post::where("sjt_post", 'like', '%' . $name . '%')->get();
     }
 
-    public function getAllPosts()
+    public function getPostsByUser($id)
     {
-        return DB::table('posts')
-            ->join('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
-            ->join('categories', 'posts.categorie_id', '=', 'categories.id')
-            // ->join('comments', 'posts.id', '=', 'comments.post_id',"left")
-            // ->select('*')    
-            ->select("*", "posts.id")
-            ->get();
-        // return post::join
-        // ('utilisateurs', 'posts.utilisateur_id', '=', 'utilisateurs.id')
-        // // ->join('orders', 'users.id', '=', 'orders.user_id')
-        // ->select('posts.id')
-        // ->get();
+        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes', "categorie")->where("utilisateur_id", 'like',  $id )->get();
+
+        foreach ($posts as $post) {
+            foreach ($post->comments as $comment) {
+                $comment->setAttribute('user', utilisateur::find($comment->utilisateur_id));
+            }
+        }
+
+        return response(array(
+            'posts' => $posts
+        ), 200);
     }
     //likes
     public function likes(Request $request)
@@ -151,7 +150,7 @@ class PostController extends Controller
     }
     public function postsByCategorie($id)
     {
-        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes', "categorie")->where("categorie_id", 'like',  $id )->get();
+        $posts = Post::orderBy('created_at', 'desc')->with('utilisateur', 'comments', 'likes', 'dislikes', "categorie")->where("categorie_id", 'like',  $id)->get();
 
         foreach ($posts as $post) {
             foreach ($post->comments as $comment) {

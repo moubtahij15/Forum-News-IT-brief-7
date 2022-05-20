@@ -37,6 +37,7 @@ Route::post('/testPass/{id}', [AuthController::class, 'testPass']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/post', [PostController::class, 'index']);
+Route::get('/post/user/{id}', [PostController::class, 'getPostsByUser']);
 Route::get('/categorie', [categorieController::class, 'index']);
 Route::get('/post/{id}', [PostController::class, 'show']);
 Route::get('/post/search/{name}', [PostController::class, 'search']);

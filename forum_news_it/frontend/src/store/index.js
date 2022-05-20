@@ -214,31 +214,31 @@ const store = createStore({
                 });
         },
         // test Old password
-        testPass({ commit },user) {
-
-
-            // axiosClient.post('/user', {
-            //     id: 'Fred',
-            //     pass: 'Flintstone'
-            // })
-            //     .then(function (response) {
-            //         console.log(response);
-            //     })
-                    // console.log(user);
+        testPass({ commit }, user) {
 
             return axiosClient.post('/testPass/' + user.id, {
                 pass: user.pass.old
             })
                 .then(response => {
-                    // console.log(response.data)
 
-
-                    // commit("setUser", response.data);
 
                     return response.data;
 
                 }).catch(function (error) {
-                    // console.log(error);
+                });
+        },
+        // user post
+        postByUser({ commit }, user) {
+
+            return axiosClient.get('/post/user/' + user)
+                .then(response => {
+                    commit("setPosts", response.data);
+
+                        console.log(response.data);
+                    return response.data;
+
+                }).catch(function (error) {
+                    console.log(error);
                 });
         }
 
