@@ -14,6 +14,11 @@
     <!--middle wall-->
 
 
+    
+
+
+
+
 
     <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md ">
       <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
@@ -138,115 +143,24 @@
     </div>
 
 
+    <post>
+      <!-- <template #postDelete>
+              <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
+
+        </template>
+     
+     <template #commentsDelete>
+      <FIcons id="delete"  :icon="['fas', 'trash']" class="h-5 w-5 mt-6" @click="deleteComment(ele.id_comment)" />
+      </template> -->
+
+    </post>
 
 
 
 
     <!-- </div>  -->
     <!-- post -->
-    <div class="border     mx-auto max-w-screen-md bg-white mt-10 rounded-2xl p-4"
-      v-for="elem in $store.state.post.data.posts" :key="elem.id">
-      <div class="flex items-center	justify-between">
-        <div class="gap-3.5	flex items-center ">
-          <img
-            src="https://images.unsplash.com/photo-1617077644557-64be144aa306?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
-            class="object-cover bg-yellow-500 rounded-full w-10 h-10" />
-          <div class="flex flex-col">
-            <b class="mb-2 capitalize"> {{ elem.utilisateur.prenom }} {{ elem.utilisateur.nom }}</b>
-            <time datetime={{elem.date_post}} class="text-gray-400 text-xs">{{ elem.date_post }}
-            </time>
-          </div>
-        </div>
-        <div class="bg-gray-100	rounded-full h-3.5 flex	items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="34px" fill="#92929D">
-            <path d="M0 0h24v24H0V0z" fill="none" />
-            <path
-              d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" />
-          </svg>
-        </div>
-      </div>
-      <div class="whitespace-pre-wrap mt-7">{{ elem.sjt_post }}</div>
-      <!-- <div class="mt-5 flex gap-2	 justify-center border-b pb-4 flex-wrap	">
-        <img
-          src="https://images.unsplash.com/photo-1610147323479-a7fb11ffd5dd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-          class="bg-red-500 rounded-2xl w-1/3 object-cover h-96 flex-auto" alt="photo">
-        <img
-          src="https://images.unsplash.com/photo-1614914135224-925593607248?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
-          class="bg-red-500 rounded-2xl w-1/3 object-cover h-96 flex-auto" alt="photo">
-      </div> -->
-      <!-- reaction -->
-      <div class=" h-16 border-b  flex items-center justify-around	">
-        <div class="flex items-center	gap-3	">
 
-          <PencilAltIcon class="h-6 w-6" />
-
-
-          <div class="text-sm	"> {{ elem.comments.length }} Comments</div>
-        </div>
-        <div class="flex items-center	gap-3">
-          <!-- like² -->
-
-          <div id="likes" class="flex items-center	gap-3" @click="setLike(elem)">
-            <FIcons v-if="isLiked(elem)" :icon="['fas', 'heart']" class="h-5 w-5" />
-            <FIcons v-else :icon="['far', 'heart']" class="h-5 w-5" />
-            <div class="text-sm"> {{ elem.likes.length }} Likes</div>
-          </div>
-          <div>
-
-
-            <!-- <FIcons  v-if="isLiked(elem)" :icon ="['fas','heart']"/> -->
-            <!-- <p v-if="ele.utilisateur_id==comment.utilisateur_id ">  {{ele.utilisateur_id}}  //  {{comment.utilisateur_id}}</p>
-              <p v-else>  teeeest</p> -->
-
-          </div>
-        </div>
-        <div id="dislike" class="flex items-center	gap-3" @click="setDislikeLike(elem)">
-
-          <FIcons v-if="isDisLiked(elem)" :icon="['fas', 'thumbs-down']" class="h-5 w-5" />
-          <FIcons v-else :icon="['far', 'thumbs-down']" class="h-5 w-5" />
-
-          <div class="text-sm">{{ elem.dislikes.length }} Dislikes</div>
-        </div>
-
-      </div>
-
-      <!-- comment -->
-      <!-- post a comment -->
-      <div
-        class="relative flex items-center self-center w-full max-w-xxl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
-        <img class='w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar'
-          src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200'>
-        <span class="absolute inset-y-0 right-0 flex items-center pr-6">
-
-        </span>
-
-        <input type="search"
-          class="w-full py-2 pl-4 pr-10 text-sm bg-gray-100 border border-transparent appearance-none rounded-tg placeholder-gray-400 focus:bg-white focus:outline-none focus:border-blue-500 focus:text-gray-900 focus:shadow-outline-blue"
-          style="border-radius: 25px" placeholder="Post a comment..." autocomplete="off" v-model="comment.sjt_comments">
-        <div class="-mr-1">
-          <input type='submit'
-            class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100"
-            value='Post Comment' @click="setComment(elem)">
-        </div>
-      </div>
-
-      <!-- comments recent -->
-      <div class="flex  bg-white dark:bg-gray-800" v-for="ele in elem.comments" :key="ele.id">
-        <div class="bg-white dark:bg-gray-800 text-black  dark:text-gray-200 p-4 antialiased flex max-w-lg">
-          <img class="rounded-full h-8 w-8  mt-1 " src="https://picsum.photos/id/1027/200/200" />
-          <div>
-            <div class="bg-gray-100   dark:bg-gray-700 rounded-3xl px-4 pt-2 pb-2.5">
-              <div class="font-semibold text-sm leading-relaxed">{{ ele.user.prenom }} {{ ele.user.nom }}</div>
-              <div class="text-normal leading-snug md:leading-normal"> {{ ele.sjt_comments }}</div>
-            </div>
-            <div class="text-sm ml-4 mt-0.5 text-gray-500 dark:text-gray-400">14 w</div>
-
-          </div>
-        </div>
-
-      </div>
-
-    </div>
 
   </main>
 
@@ -258,11 +172,12 @@
 import { computed } from '@vue/reactivity'
 import { BanIcon, HeartIcon, PencilAltIcon } from '@heroicons/vue/outline'
 // import { BanIcon, HeartIcon, PencilAltIcon } from '@heroicons/vue/solid'
-
+import post from '../components/post.vue'
 import { useRouter } from 'vue-router';
 import store from "../store";
+// import Post1 from '../components/post.vue';
 export default {
-  name: "Dashboard",
+  name: "homePage",
   data() {
     return {
       comment: {
@@ -291,25 +206,13 @@ export default {
   components: {
     BanIcon,
     HeartIcon,
-    PencilAltIcon
+    PencilAltIcon,
+    post
   },
   post: {},
   methods: {
     // get all posts
-    getAllPosts() {
-      store
-        .dispatch('getAllPosts')
-        .then((response) => {
-          // store
-          //   .dispatch('getAllComments')
-          // console.log(response);
 
-          // console.log(store.state.post.data);
-
-        })
-
-
-    },
     // get all gategorie
 
     setCategories() {
@@ -326,152 +229,6 @@ export default {
 
     },
     // set comment
-    setComment(elem) {
-      // console.log(store.state.user.data);  
-      this.comment.utilisateur_id = sessionStorage.getItem("idUser");
-      this.comment.post_id = elem.id;
-      //  console.log(this.comment);
-      store
-        .dispatch('comments', this.comment)
-        .then((response) => {
-          // console.log(response)
-
-          // store
-          //   .dispatch('getAllComments')
-          // console.log(response);
-          this.comment.sjt_comments = "";
-
-          this.getAllPosts();
-
-
-          // console.log(store.state.post.data);
-
-        })
-
-      // console.log(elem);  
-    },
-    // for like
-
-    isLiked(post) {
-      // console.log(post);
-
-      for (var elem in post.likes) {
-        // console.log(post.likes[elem].utilisateur_id);
-        if (post.likes[elem].utilisateur_id == this.comment.utilisateur_id) {
-          // console.log();
-          this.likeId = post.likes[elem].id
-          return true
-
-        }
-
-      }
-
-    },
-    async setLike(post) {
-      // console.log("ok");
-      console.log(this.postData.categorie_id);
-      console.log(this.postData.sjt_post);
-
-
-      this.dataLikePost.post_id = post.id;
-      //  console.log(this.comment);
-      if (!this.isLiked(post)) {
-        store
-          .dispatch('like', this.dataLikePost)
-          .then((response) => {
-            // console.log(response)
-
-            // store
-            //   .dispatch('getAllComments')
-            // this.comment.sjt_comments = "";
-            if (this.isDisLiked(post)) {
-              this.setDislikeLike(post)
-
-            }
-
-            this.getAllPosts();
-
-
-            // console.log(store.state.post.data);
-
-          })
-      }
-      else {
-        store
-          .dispatch('destroyLike', this.likeId)
-          .then((response) => {
-
-            // store
-            //   .dispatch('getAllComments')
-            // console.log(response);
-            // this.comment.sjt_comments = "";
-            this.getAllPosts();
-
-
-            // console.log(store.state.post.data);
-
-          })
-
-      }
-    },
-    // for dislike
-    isDisLiked(post) {
-
-      for (var elem in post.dislikes) {
-        // console.log(post.likes[elem].utilisateur_id);
-        if (post.dislikes[elem].utilisateur_id == this.comment.utilisateur_id) {
-          // console.log();
-          this.dislikesId = post.dislikes[elem].id
-          return true
-
-        }
-
-      }
-
-    },
-
-    async setDislikeLike(post) {
-      // console.log("ok");
-
-      this.dataLikePost.post_id = post.id;
-      //  console.log(this.comment);
-      if (!this.isDisLiked(post)) {
-        store
-          .dispatch('dislike', this.dataLikePost)
-          .then((response) => {
-
-
-            if (this.isLiked(post)) {
-              this.setLike(post)
-
-            }
-            // this.setLike(post)
-            this.getAllPosts();
-
-
-            // console.log(store.state.post.data);
-
-          })
-      }
-      else {
-        store
-          .dispatch('destroyDisLike', this.dislikesId)
-          .then((response) => {
-
-            // store
-            //   .dispatch('getAllComments')
-            // console.log(response);
-            // this.comment.sjt_comments = "";
-
-            this.getAllPosts();
-
-
-            // console.log(store.state.post.data);
-
-          })
-
-      }
-    },
 
 
     getAllPostsByCategorie(elem) {
@@ -508,11 +265,12 @@ export default {
 
   mounted() {
     // this.post = store.state.post.data;
-    if (this.testCate) {
-      this.getAllPosts();
+    // if (this.testCate) {
+    //   this.getAllPosts();
 
-    }
-    this.setCategories();
+    // }
+    // this.setCategories();
+    console.log(this.$options.name);
   },
 
 }
