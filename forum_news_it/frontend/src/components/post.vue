@@ -76,9 +76,8 @@
 
                         </div>
                         <!-- <option disabled>{{ this.categEdit }}</option> -->
-                        <option  v-for="elem in $store.state.categorie.data"
-                            :key="elem.id">
-                            <div >{{
+                        <option v-for="elem in $store.state.categorie.data" :key="elem.id">
+                            <div>{{
                                     elem.nom_categorie
                             }} </div>
                         </option>
@@ -330,8 +329,17 @@ export default {
 
 
         },
-        // get all gategorie
+        UserPost() {
+            store
+                .dispatch('postByUser', this.postData.utilisateur_id)
+                .then((response) => {
+                    // store
+                    //   .dispatch('getAllComments')
 
+
+                });
+            // get all gategorie
+        },
         setCategories() {
             store
                 .dispatch('getAllCategories')
@@ -533,14 +541,18 @@ export default {
     mounted() {
         // this.post = store.state.post.data;
         if (this.testCate) {
-            this.getAllPosts();
+                this.nameMethod+"()";
 
         }
         this.setCategories();
         this.idComment = this.$options.name
-        console.log(this.$parent.$options.name);
+        console.log(this.nameMethod);
 
     },
+    props:{
+        nameMethod:String,
+
+    }
 }
 
 </script>

@@ -143,7 +143,7 @@
     </div>
 
 
-    <post>
+    <post nameMethod="getAllPosts">
       <!-- <template #postDelete>
               <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
 
