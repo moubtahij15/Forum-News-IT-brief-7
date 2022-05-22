@@ -41,6 +41,67 @@
         </div>
       </div>
     </div> -->
+    <!-- modal for edit post -->
+    <div v-if="showModal"
+        class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+        <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
+            <!--content-->
+            <div
+                class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <!--header-->
+                <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                    <h3 class="text-3xl font-semibold">
+                        modifier post
+                    </h3>
+                    <button
+                        class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none">
+                        <span
+                            class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                            ×
+                        </span>
+                    </button>
+                </div>
+                <!--body-->
+                <div class="relative p-6 flex-auto w-full">
+                    <div class="whitespace-pre-wrap mt-7"> <textarea v-model="this.sjtEdit" placeholder="prenom"
+                            class="bg-purple-white shadow rounded border-0 p-3 w-full" required="required"
+                            name="integration[shop_name]" id="integration_shop_name"></textarea>
+                    </div>
+                </div>
+                <div class=" flex-1 px-2 pt-2 mx-10 m-2">
+
+                    <select v-model="this.categEdit" required
+                        class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                        <div>
+
+                        </div>
+                        <!-- <option disabled>{{ this.categEdit }}</option> -->
+                        <option  v-for="elem in $store.state.categorie.data"
+                            :key="elem.id">
+                            <div >{{
+                                    elem.nom_categorie
+                            }} </div>
+                        </option>
+
+                    </select>
+                </div>
+                <!--footer-->
+                <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                    <button
+                        class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" v-on:click="toggleModal()">
+                        Close
+                    </button>
+                    <button
+                        class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        type="button" v-on:click="toggleModal()">
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal edit pot -->
     <div>
 
 
@@ -66,58 +127,10 @@
                 <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'trash']"
                     class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
                 <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'edit']"
-                    class="h-5 w-5 mt-6 mx-2" v-on:click="toggleModal()" />
+                    class="h-5 w-5 mt-6 mx-2" v-on:click="toggleModal(elem)" />
 
 
-                <!-- modal for edit post -->
-                <div v-if="showModal"
-                    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
-                    <div class="relative w-auto my-6 mx-auto max-w-3xl">
-                        <!--content-->
-                        <div
-                            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                            <!--header-->
-                            <div
-                                class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                                <h3 class="text-3xl font-semibold">
-                                    Modal Title
-                                </h3>
-                                <button
-                                    class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none">
-                                    <span
-                                        class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
-                                        ×
-                                    </span>
-                                </button>
-                            </div>
-                            <!--body-->
-                            <div class="relative p-6 flex-auto">
-                                <p class="my-4 text-slate-500 text-lg leading-relaxed">
-                                    I always felt like I could do anything. That’s the main
-                                    thing people are controlled by! Thoughts- their perception
-                                    of themselves! They're slowed down by their perception of
-                                    themselves. If you're taught you can’t do anything, you
-                                    won’t do anything. I was taught I could do everything.
-                                </p>
-                            </div>
-                            <!--footer-->
-                            <div
-                                class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
-                                <button
-                                    class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button" v-on:click="toggleModal()">
-                                    Close
-                                </button>
-                                <button
-                                    class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button" v-on:click="toggleModal()">
-                                    Save Changes
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end modal edit pot -->
+
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="34px" fill="#92929D">
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path
@@ -250,7 +263,9 @@ export default {
             dislikesId: "",
             testCate: true,
             idComment: this.$options.name,
-            showModal: false
+            showModal: false,
+            sjtEdit: "",
+            categEdit: "",
 
 
         };
@@ -265,8 +280,18 @@ export default {
     },
     post: {},
     methods: {
-        toggleModal: function () {
+        testEditCategorie(elm) {
+            console.log(elm.categorie)
+
+        },
+        toggleModal: function (elm) {
             this.showModal = !this.showModal;
+            if (this.showModal) {
+                this.sjtEdit = elm.sjt_post;
+                this.categEdit = elm.categorie.nom_categorie
+                console.log(this.categEdit)
+
+            }
         },
         // delete comment
         deleteComment(id) {
@@ -297,7 +322,7 @@ export default {
                 .then((response) => {
                     // store
                     //   .dispatch('getAllComments')
-                    // console.log(response);
+                    console.log(response);
 
                     // console.log(store.state.post.data);
 
