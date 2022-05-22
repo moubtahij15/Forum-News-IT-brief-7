@@ -1,9 +1,9 @@
 <template>
-<!-- <button
+    <!-- <button
       class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       type="button" data-modal-toggle="defaultModal">
       Toggle modal
-    </button> -->
+    </button>
     <div id="defaultModal" tabindex="-1" aria-hidden="true"
       class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full justify-center items-center">
       <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
@@ -40,11 +40,16 @@
           </div>
         </div>
       </div>
+    </div> -->
+    <div>
+
+
+        <div v-if="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
     </div>
     <div class="border     mx-auto max-w-screen-md bg-white mt-10 rounded-2xl p-4"
         v-for="elem in $store.state.post.data.posts" :key="elem.id">
-       
-   
+
+
         <div class="flex items-center	justify-between">
             <div class="gap-3.5	flex items-center ">
                 <img src="https://images.unsplash.com/photo-1617077644557-64be144aa306?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
@@ -54,16 +59,65 @@
                     <time datetime={{elem.date_post}} class="text-gray-400 text-xs">{{ elem.date_post }}
                     </time>
                 </div>
-                <button
-      class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      type="button" data-modal-toggle="defaultModal">
-      Toggle modal
-    </button>
+
             </div>
             <div class="rounded-full h-3.5 flex	items-center justify-center">
 
                 <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'trash']"
                     class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
+                <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'edit']"
+                    class="h-5 w-5 mt-6 mx-2" v-on:click="toggleModal()" />
+
+
+                <!-- modal for edit post -->
+                <div v-if="showModal"
+                    class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+                    <div class="relative w-auto my-6 mx-auto max-w-3xl">
+                        <!--content-->
+                        <div
+                            class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                            <!--header-->
+                            <div
+                                class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                <h3 class="text-3xl font-semibold">
+                                    Modal Title
+                                </h3>
+                                <button
+                                    class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none">
+                                    <span
+                                        class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                                        ×
+                                    </span>
+                                </button>
+                            </div>
+                            <!--body-->
+                            <div class="relative p-6 flex-auto">
+                                <p class="my-4 text-slate-500 text-lg leading-relaxed">
+                                    I always felt like I could do anything. That’s the main
+                                    thing people are controlled by! Thoughts- their perception
+                                    of themselves! They're slowed down by their perception of
+                                    themselves. If you're taught you can’t do anything, you
+                                    won’t do anything. I was taught I could do everything.
+                                </p>
+                            </div>
+                            <!--footer-->
+                            <div
+                                class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+                                <button
+                                    class="text-red-500 bg-transparent border border-solid border-red-500 hover:bg-red-500 hover:text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button" v-on:click="toggleModal()">
+                                    Close
+                                </button>
+                                <button
+                                    class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                    type="button" v-on:click="toggleModal()">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end modal edit pot -->
                 <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="34px" fill="#92929D">
                     <path d="M0 0h24v24H0V0z" fill="none" />
                     <path
@@ -73,8 +127,8 @@
         </div>
         <div ata-modal-toggle="defaultModal" class="whitespace-pre-wrap mt-7">{{ elem.sjt_post }}</div>
         <!-- modal for updat sujet for the post -->
-      
-        
+
+
         <!-- <div class="mt-5 flex gap-2	 justify-center border-b pb-4 flex-wrap	">
         <img
           src="https://images.unsplash.com/photo-1610147323479-a7fb11ffd5dd?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1534&q=80"
@@ -161,8 +215,8 @@
         </div>
 
     </div>
-   
-   
+
+
 </template>
 <script>
 
@@ -196,6 +250,8 @@ export default {
             dislikesId: "",
             testCate: true,
             idComment: this.$options.name,
+            showModal: false
+
 
         };
     },
@@ -209,6 +265,9 @@ export default {
     },
     post: {},
     methods: {
+        toggleModal: function () {
+            this.showModal = !this.showModal;
+        },
         // delete comment
         deleteComment(id) {
             // console.log(id);
@@ -453,7 +512,7 @@ export default {
 
         }
         this.setCategories();
-        // this.idComment= this.$options.name
+        this.idComment = this.$options.name
         console.log(this.$parent.$options.name);
 
     },

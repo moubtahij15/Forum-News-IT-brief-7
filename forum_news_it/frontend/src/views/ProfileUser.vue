@@ -133,7 +133,7 @@ import store from "../store";
 
 
 export default {
-  name: "test",
+  name: "profile",
   data() {
     return {
 

@@ -14,7 +14,7 @@
     <!--middle wall-->
 
 
-    
+   
 
 
 
@@ -198,7 +198,9 @@ export default {
       },
       likeId: "",
       dislikesId: "",
-      testCate: true
+      testCate: true,
+      showModal: false
+
     };
   },
 
@@ -212,7 +214,9 @@ export default {
   post: {},
   methods: {
     // get all posts
-
+    toggleModal: function () {
+      this.showModal = !this.showModal;
+    },
     // get all gategorie
 
     setCategories() {
