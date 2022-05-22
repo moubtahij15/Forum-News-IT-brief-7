@@ -14,7 +14,7 @@
     <!--middle wall-->
 
 
-   
+
 
 
 
@@ -143,7 +143,7 @@
     </div>
 
 
-    <post nameMethod="getAllPosts">
+    <post nameMethod="t">
       <!-- <template #postDelete>
               <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
 
@@ -213,6 +213,21 @@ export default {
   },
   post: {},
   methods: {
+    getAllPosts() {
+      store
+        .dispatch('getAllPosts')
+        .then((response) => {
+          // store
+          //   .dispatch('getAllComments')
+          console.log(response);
+
+          // console.log(store.state.post.data);
+
+        })
+
+
+    },
+
     // get all posts
     toggleModal: function () {
       this.showModal = !this.showModal;
@@ -275,6 +290,7 @@ export default {
     // }
     // this.setCategories();
     console.log(this.$options.name);
+
   },
 
 }

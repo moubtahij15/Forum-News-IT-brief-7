@@ -93,7 +93,7 @@
                     </button>
                     <button
                         class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button" v-on:click="toggleModal()">
+                        type="button" v-on:click="updatePost()">
                         Save Changes
                     </button>
                 </div>
@@ -254,7 +254,7 @@ export default {
 
             },
             postData: {
-                "utilisateur_id": sessionStorage.getItem("idUser"),
+                "id": "",
                 "categorie_id": "",
                 "sjt_post": ""
             },
@@ -286,8 +286,9 @@ export default {
         toggleModal: function (elm) {
             this.showModal = !this.showModal;
             if (this.showModal) {
-                this.sjtEdit = elm.sjt_post;
-                this.categEdit = elm.categorie.nom_categorie
+                this.id=elm.id;
+                this.postData.sjt_post = elm.sjt_post;
+                this.postData.categorie_id = elm.categorie.nom_categorie
                 console.log(this.categEdit)
 
             }
@@ -299,7 +300,11 @@ export default {
                 .dispatch('deleteComment', id)
                 .then((response) => {
 
-                    this.getAllPosts();
+                    if (this.$parent.$options.name == 'homePage') {
+                        this.getAllPosts();
+                    } else if (this.$parent.$options.name == 'profile') {
+                        this.getAllPostsUser()
+                    }
 
                 })
         },
@@ -310,8 +315,11 @@ export default {
                 .dispatch('deletePost', id)
                 .then((response) => {
 
-                    this.getAllPosts();
-
+                    if (this.$parent.$options.name == 'homePage') {
+                        this.getAllPosts();
+                    } else if (this.$parent.$options.name == 'profile') {
+                        this.getAllPostsUser()
+                    }
                 })
         },
         // get all posts
@@ -329,9 +337,30 @@ export default {
 
 
         },
-        UserPost() {
+        updatePost(post) {
+
             store
-                .dispatch('postByUser', this.postData.utilisateur_id)
+                .dispatch('updatePost' + post.id, post)
+                .then((response) => {
+                    // console.log(response)
+                    console.log(response);
+
+                    if (this.$parent.$options.name == 'homePage') {
+                        this.getAllPosts();
+                    } else if (this.$parent.$options.name == 'profile') {
+                        this.getAllPostsUser()
+                    }
+                    // this.user.pass = "";          // store
+                    //   .dispatch('getAllComments')
+                    // console.log(response);
+
+
+
+                })
+        },
+        getAllPostsUser() {
+            store
+                .dispatch('postByUser', sessionStorage.getItem("idUser"))
                 .then((response) => {
                     // store
                     //   .dispatch('getAllComments')
@@ -368,8 +397,11 @@ export default {
                     //   .dispatch('getAllComments')
                     // console.log(response);
                     this.comment.sjt_comments = "";
-
-                    this.getAllPosts();
+                    if (this.$parent.$options.name == 'homePage') {
+                        this.getAllPosts();
+                    } else if (this.$parent.$options.name == 'profile') {
+                        this.getAllPostsUser()
+                    } this.getAllPosts();
 
 
                     // console.log(store.state.post.data);
@@ -417,7 +449,11 @@ export default {
 
                         }
 
-                        this.getAllPosts();
+                        if (this.$parent.$options.name == 'homePage') {
+                            this.getAllPosts();
+                        } else if (this.$parent.$options.name == 'profile') {
+                            this.getAllPostsUser()
+                        }
 
 
                         // console.log(store.state.post.data);
@@ -433,7 +469,11 @@ export default {
                         //   .dispatch('getAllComments')
                         // console.log(response);
                         // this.comment.sjt_comments = "";
-                        this.getAllPosts();
+                        if (this.$parent.$options.name == 'homePage') {
+                            this.getAllPosts();
+                        } else if (this.$parent.$options.name == 'profile') {
+                            this.getAllPostsUser()
+                        }
 
 
                         // console.log(store.state.post.data);
@@ -474,7 +514,11 @@ export default {
 
                         }
                         // this.setLike(post)
-                        this.getAllPosts();
+                        if (this.$parent.$options.name == 'homePage') {
+                            this.getAllPosts();
+                        } else if (this.$parent.$options.name == 'profile') {
+                            this.getAllPostsUser()
+                        }
 
 
                         // console.log(store.state.post.data);
@@ -490,8 +534,11 @@ export default {
                         //   .dispatch('getAllComments')
                         // console.log(response);
                         // this.comment.sjt_comments = "";
-
-                        this.getAllPosts();
+                        if (this.$parent.$options.name == 'homePage') {
+                            this.getAllPosts();
+                        } else {
+                            this.getAllPostsUser()
+                        }
 
 
                         // console.log(store.state.post.data);
@@ -519,7 +566,11 @@ export default {
                 .dispatch('deleteComment', id)
                 .then((response) => {
 
-                    this.getAllPosts();
+                    if (this.$parent.$options.name == 'homePage') {
+                        this.getAllPosts();
+                    } else if (this.$parent.$options.name == 'profile') {
+                        this.getAllPostsUser()
+                    }
 
                 })
         },
@@ -530,10 +581,15 @@ export default {
                 .dispatch('deletePost', id)
                 .then((response) => {
 
-                    this.getAllPosts();
+                    if (this.$parent.$options.name == 'homePage') {
+                        this.getAllPosts();
+                    } else if (this.$parent.$options.name == 'profile') {
+                        this.getAllPostsUser()
+                    }
 
                 })
         },
+
 
 
     },
@@ -541,16 +597,25 @@ export default {
     mounted() {
         // this.post = store.state.post.data;
         if (this.testCate) {
-                this.nameMethod+"()";
+            if (this.$parent.$options.name == 'homePage') {
+                this.getAllPosts();
+            } else {
+                this.getAllPostsUser()
+            }
 
+        }
+        if (this.$parent.$options.name == 'homePage') {
+            this.getAllPosts();
+        } else {
+            this.getAllPostsUser()
         }
         this.setCategories();
         this.idComment = this.$options.name
         console.log(this.nameMethod);
 
     },
-    props:{
-        nameMethod:String,
+    props: {
+        nameMethod: String,
 
     }
 }

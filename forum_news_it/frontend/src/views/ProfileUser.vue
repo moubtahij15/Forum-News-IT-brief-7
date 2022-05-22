@@ -113,7 +113,7 @@
 
           <!-- post  -->
           <post>
-        
+
           </post>
 
           <!-- End post -->
@@ -245,37 +245,16 @@ export default {
       }
 
     },
+    
 
 
-    // delete comment
-    deleteComment(id) {
-      // console.log(id);
-      store
-        .dispatch('deleteComment', id)
-        .then((response) => {
 
-          this.getAllPosts();
-
-        })
-    },
-    // delete post
-    deletePost(id) {
-      console.log(id);
-      store
-        .dispatch('deletePost', id)
-        .then((response) => {
-
-          this.getAllPosts();
-
-        })
-    },
   },
   mounted() {
     // 
-       
+
     this.getInfoUser();
     // this.setCategories();
-
     // console.log(this.user.info)
   }
 }

@@ -254,8 +254,21 @@ const store = createStore({
                 });
         },
         deletePost({ commit }, id) {
-         
+
             return axiosClient.delete('/post/' + id)
+                .then(response => {
+
+                    console.log(response.data)
+                    return response.data;
+
+                }).catch(function (error) {
+                    console.log(error);
+                });
+        },
+        //update post
+        updatePost({ commit }, post) {
+
+            return axiosClient.put('/post/' + post.id,post)
                 .then(response => {
 
                     console.log(response.data)

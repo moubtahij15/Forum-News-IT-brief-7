@@ -88,7 +88,11 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->update($request->all());
-        return $post;
+
+        return response(array(
+            'posts' => $post
+        ), 200);
+        // return $post;
     }
 
     /**
