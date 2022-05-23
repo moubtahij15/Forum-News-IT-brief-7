@@ -22,16 +22,16 @@
             <div class="hidden md:block">
               <div class="ml-10 flex items-baseline space-x-4">
 
-                <router-link :to="'/HomePage'"
+                <router-link :to="'/HomePage'" v-if="userss"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">home
                 </router-link>
-                <router-link :to="'/ProfileUser'"
+                <router-link :to="'/ProfileUser'" v-if="userss"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   Profile</router-link>
-                <router-link :to="'/dashboardAdmin'"
+                <router-link :to="'/dashboardAdmin'" v-if="admin"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   dashboard</router-link>
-                <router-link :to="'/users'"
+                <router-link :to="'/Allusers'" v-if="admin"
                   class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">
                   users
                 </router-link>
@@ -90,18 +90,18 @@
             {{ item.name }}
 
                 </router-link> -->
-          <router-link :to="'/HomePage'"
+          <router-link :to="'/HomePage'" v-if="userss"
             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2block px-3 py-2 rounded-md text-base font-medium">
             home
           </router-link>
-          <router-link :to="'/ProfileUser'"
+          <router-link :to="'/ProfileUser'" v-if="userss"
             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium">
-            Profile</router-link>
-          <router-link :to="'/dashboardAdmin'"
+            Profile</router-link> 
+          <router-link :to="'/dashboardAdmin'" v-if="admin"
             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium">
             dashboard
           </router-link>
-          <router-link :to="'/users'"
+          <router-link :to="'/users'" v-if="admin"
             class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 block px-3 py-2 rounded-md text-base font-medium">
             users
           </router-link>
@@ -143,6 +143,9 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline'
 import { computed } from '@vue/reactivity'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import store from "../store";
+
+
 // const user={}
 // const user = {
 //   id: "12",
@@ -155,17 +158,18 @@ import { useRouter } from 'vue-router'
 //   imageUrl:
 //     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 // }
-const navigation = [
-  { name: 'home', to: { name: "HomePage" } },
-  { name: 'Profile', to: { name: "ProfileUser" } },
-  { name: 'dashboardAdmin', to: { name: "dashboardAdmin" } },
-  // { name: 'users', to: { name: "ProfileUser" } },
 
-]
 
 
 export default {
   name: "navBar",
+  data() {
+    return {
+      admin:sessionStorage.getItem("TOKEN_ADMIN"),
+      userss:sessionStorage.getItem("TOKEN")
+
+    }
+  },
   components: {
     Disclosure,
     DisclosureButton,
@@ -190,7 +194,7 @@ export default {
     }
   },
   mounted() {
-
+    console.log( "hada"+this.userss);
     console.log(this.$parent.$options.name);
 
 
@@ -206,7 +210,6 @@ export default {
     return {
 
       user: computed(() => store.state.user.data),
-      navigation,
     }
   },
 }

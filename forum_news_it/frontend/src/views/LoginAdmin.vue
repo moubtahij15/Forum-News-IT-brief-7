@@ -67,29 +67,7 @@ export default {
         //     reff: { required, maxLength: maxLength(10) },
         //   }
         // },
-        login(ev) {
-
-            ev.preventDefault();
-
-
-            store
-                .dispatch('login', this.user)
-                .then((response) => {
-
-
-                    console.log(response);
-                    if (response.data.message != "success") {
-                        this.error = true
-                    }
-                    this.redirectTo({ val: "HomePage" });
-                })
-
-
-        },
-
-
-
-
+       
     }
 }
 </script>

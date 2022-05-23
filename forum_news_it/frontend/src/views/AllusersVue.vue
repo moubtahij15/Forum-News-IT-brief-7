@@ -94,7 +94,8 @@
 
                                                 <td
                                                     class="px-6 py-4 whitespace-no-wrap text-center border-b border-gray-200 text-sm leading-5 font-medium">
-                                                    <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5" @click="deleteUser(elem.id)" />
+                                                    <FIcons id="delete" :icon="['fas', 'trash']" class="h-5 w-5"
+                                                        @click="deleteUser(elem.id)" />
 
                                                 </td>
                                             </tr>
@@ -163,7 +164,7 @@ export default {
         },
         deleteUser(id) {
             store
-                .dispatch('deleteUser',id)
+                .dispatch('deleteUser', id)
                 .then((response) => {
                     // store
                     //   .dispatch('getAllComments')
@@ -188,6 +189,15 @@ export default {
     },
     mounted() {
         this.getAllUsers()
-    },
+        let e = sessionStorage.getItem("TOKEN_ADMIN");
+        // }
+        // this.setCategories();
+        if (!e) {
+            this.redirectTo({ val: "LoginAdmin" });
+
+        }
+
+    
+},
 }
 </script>

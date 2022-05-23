@@ -64,7 +64,7 @@ const store = createStore({
         },
         // delete user
         deleteUser({ commit }, id) {
-            return axiosClient.delete('/user/' + id)
+            return axiosClient.delete('/user/'+id)
                 .then(response => {
                     // response.data.forEach(obj => {
                     //     Object.entries(obj).forEach(([key, value]) => {
@@ -72,6 +72,27 @@ const store = createStore({
                     //         if()
 
                     //     }); });                    
+                    // console.log(response.data.posts);
+                    return response.data
+                });
+
+        },
+
+        // login admin
+        loginAdmin({ commit }, admin) {
+            return axiosClient.post('/loginAdmin' ,admin)
+                .then(response => {
+                    // response.data.forEach(obj => {
+                    //     Object.entries(obj).forEach(([key, value]) => {
+                    //         console.log(`${key} ${value}`);
+                    //         if()
+
+                    //     }); });    
+                    if (response.data.message == "success") {
+                    commit("setTokenAdmin", response.data.token);
+
+                    }        
+
                     // console.log(response.data.posts);
                     return response.data
                 });
@@ -380,6 +401,8 @@ const store = createStore({
             state.user.data = {};
             state.user.token = null;
             sessionStorage.clear();
+            // this.redirectTo({ val: "Login" });
+            router.push("Login")
         },
 
         //admin
@@ -394,6 +417,12 @@ const store = createStore({
             // sessionStorage.setItem('userInfos', "state.user.data");
 
 
+        },
+
+
+        setTokenAdmin: (state, token) => {
+            state.user.token = token;
+            sessionStorage.setItem('TOKEN_ADMIN', token);
         },
     },
     modules: {},

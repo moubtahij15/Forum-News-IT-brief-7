@@ -24,7 +24,7 @@
     ```
   -->
 
-  <loginComponent  role ="User"/>
+  <loginComponent role="User" />
 
 </template>
 
@@ -90,6 +90,15 @@ export default {
 
 
 
-  }
+  },
+  mounted() {
+    let e = sessionStorage.getItem("TOKEN");
+    // }
+    // this.setCategories();
+    if (e) {
+      this.redirectTo({ val: "HomePage" });
+
+    }
+  },
 }
 </script>

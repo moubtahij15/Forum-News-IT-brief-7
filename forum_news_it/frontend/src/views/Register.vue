@@ -153,6 +153,15 @@ export default {
     components: {
         LockClosedIcon
     },
+    mounted() {
+        let e = sessionStorage.getItem("TOKEN");
+        // }
+        // this.setCategories();
+        if (e) {
+            this.redirectTo({ val: "HomePage" });
+
+        }
+    },
 
 
 }

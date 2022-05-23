@@ -110,6 +110,16 @@ export default {
 
 
 
+    },
+    mounted() {
+        let e = sessionStorage.getItem("TOKEN_ADMIN");
+    // }
+    // this.setCategories();
+    if (!e) {
+      this.redirectTo({ val: "LoginAdmin" });
+
     }
+
+    },
 }
 </script>

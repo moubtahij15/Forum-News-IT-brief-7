@@ -20,7 +20,7 @@
       Bien ajoute </div>
 
 
-    
+
     <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md ">
       <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
       <button v-for="elem in $store.state.categorie.data" :key="elem.id"
@@ -179,6 +179,8 @@ import { BanIcon, HeartIcon, PencilAltIcon } from '@heroicons/vue/outline'
 import post from '../components/post.vue'
 import { useRouter } from 'vue-router';
 import store from "../store";
+import { mapActions } from "vuex";
+
 // import Post1 from '../components/post.vue';
 export default {
   name: "homePage",
@@ -217,6 +219,8 @@ export default {
   },
   post: {},
   methods: {
+    ...mapActions(["redirectTo"]),
+
     getAllPosts() {
       store
         .dispatch('getAllPosts')
@@ -291,10 +295,14 @@ export default {
     // this.post = store.state.post.data;
     // if (this.testCate) {
     //   this.getAllPosts();
-
+    let e = sessionStorage.getItem("TOKEN");
     // }
     // this.setCategories();
-    console.log(this.$options.name);
+    if (!e) {
+      this.redirectTo({ val: "Login" });
+
+    }
+    console.log(e);
 
   },
 

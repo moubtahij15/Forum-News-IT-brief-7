@@ -134,6 +134,7 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { BanIcon, HeartIcon, PencilAltIcon } from '@heroicons/vue/outline'
 import post from '../components/post.vue'
+import { mapActions } from "vuex";
 
 import store from "../store";
 
@@ -192,6 +193,7 @@ export default {
     post
   },
   methods: {
+              ...mapActions(["redirectTo"]),
 
     getInfoUser() {
       console.log(this.user.id);
@@ -265,6 +267,13 @@ export default {
   },
   mounted() {
     // 
+    let e = sessionStorage.getItem("TOKEN");
+    // }
+    // this.setCategories();
+    if (!e) {
+      this.redirectTo({ val: "Login" });
+
+    }
 
     this.getInfoUser();
     // this.setCategories();
