@@ -27,7 +27,7 @@
     <div>
         <!-- <meta name="csrf-token" content="{{ csrf_token() }}"> -->
 
-        <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        <img class="mx-auto h-24 w-24" src="https://upload.wikimedia.org/wikipedia/commons/9/93/Taskful_Logo.svg"
             alt="Workflow" />
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Register for free</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
@@ -36,7 +36,7 @@
           {{ ' ' }} --> Or
             <router-link :to="{ name: 'Login' }"> <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
                     login to your account </a> </router-link>
-                    <!-- <h1  @click="redirectTo({ val: 'Login' })"> SBSDD</h1> -->
+            <!-- <h1  @click="redirectTo({ val: 'Login' })"> SBSDD</h1> -->
         </p>
     </div>
     <form class="mt-8 space-y-6" @submit="register">
@@ -105,32 +105,55 @@
 
 </template>
 
-<script setup>
+<script >
+import { mapActions } from "vuex";
+
 import { LockClosedIcon } from '@heroicons/vue/solid'
 import { useRouter } from 'vue-router';
 import store from "../store";
 import axios from "axios";
 import { computed } from '@vue/reactivity';
+export default {
+    name: "SignUpForm",
 
-const router = useRouter();
-const user = {
-    // id: "",
-    "nom": "",
-    "prenom": "",
-    "date_naissance": "",
-    "email": "",
-    "pass": "",
-};
+    data() {
+        return {
 
-function register(ev) {
-    ev.preventDefault();
-    store
-        .dispatch('register', user)
-        .then((response) => {
-            // router.push({
-            //     name: 'HomePage'
-            // })
-        })
+            reff: "",
+            error: false,
+            router: useRouter(),
+            user: {
+                // id: "",
+                "nom": "",
+                "prenom": "",
+                "date_naissance": "",
+                "email": "",
+                "pass": "",
+            }
+        };
+
+    },
+    methods: {
+        ...mapActions(["redirectTo"]),
+
+        register(ev) {
+            ev.preventDefault();
+            store
+                .dispatch('register', this.user)
+                .then((response) => {
+                    this.redirectTo({ val: "login" });
+
+                    // router.push({
+                    //     name: 'HomePage'
+                    // })
+                })
+
+        }
+    },
+    components: {
+        LockClosedIcon
+    },
+
 
 }
 

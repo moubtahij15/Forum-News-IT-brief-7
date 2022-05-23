@@ -16,10 +16,11 @@
 
 
 
+    <div v-if="msgAdd" class="bg-green-100 rounded-lg py-5 px-6 mb-4 text-base text-green-700 mb-3" role="alert">
+      Bien ajoute </div>
 
 
-
-
+    
     <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md ">
       <h1 class="mb-4 text-xl font-bold text-gray-700">Categories</h1>
       <button v-for="elem in $store.state.categorie.data" :key="elem.id"
@@ -30,7 +31,9 @@
     </div>
 
 
-    <div class="flex  items-stretch	    ">
+
+
+    <div class="relative w-auto my-6 mx-auto w-full max-w-3xl ">
 
       <!-- add post -->
       <div class="border-1   mt-6 bg-white rounded-2xl p-4  mx-auto   flex-1     max-w-screen-md">
@@ -44,6 +47,16 @@
           </div>
         </div>
         <hr class="border-gray-600">
+        <div class=" flex-1 px-2 pt-2 mx-10 m-2">
+
+          <select v-model="this.postData.categorie_id" required
+            class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+            <option selected disabled>Choose a categorie</option>
+            <option :value=elem.id v-for="elem in $store.state.categorie.data" :key="elem.id">{{ elem.nom_categorie }}
+            </option>
+
+          </select>
+        </div>
         <!--middle creat tweet-->
         <!-- <form @click.prevent> -->
         <form @click.prevent>
@@ -64,16 +77,7 @@
 
 
           <!-- //categorie Post -->
-          <div class=" flex-1 px-2 pt-2 mx-10 m-2">
 
-            <select v-model="postData.categorie_id" required
-              class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-              <option selected>Choose a categorie</option>
-              <option :value=elem.id v-for="elem in $store.state.categorie.data" :key="elem.id">{{ elem.nom_categorie }}
-              </option>
-
-            </select>
-          </div>
 
           <!--middle creat tweet below icons-->
           <div class="flex">
@@ -196,7 +200,7 @@ export default {
         "categorie_id": "",
         "sjt_post": ""
       },
-      likeId: "",
+      msgAdd: false,
       dislikesId: "",
       testCate: true,
       showModal: false
@@ -272,6 +276,7 @@ export default {
           //   .dispatch('getAllComments')
           console.log(response);
           this.postData.sjt_post = "";
+          this.msgAdd = true
           this.getAllPosts();
 
 
