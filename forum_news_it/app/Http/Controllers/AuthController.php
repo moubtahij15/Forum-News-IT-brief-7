@@ -12,7 +12,14 @@ use Illuminate\Validation\Rules\Exists;
 class AuthController extends Controller
 {
     //
-
+    public function index()
+    {
+        return utilisateur::all();
+    }
+    public function destroy($id)
+    {
+        return utilisateur::destroy(($id));
+    }
 
     public function register(Request $request)
     {

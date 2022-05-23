@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\authAdmine;
 use App\Http\Controllers\categorieController;
 
 use App\Http\Controllers\PostController;
@@ -43,6 +44,12 @@ Route::get('/post/{id}', [PostController::class, 'show']);
 Route::get('/post/search/{name}', [PostController::class, 'search']);
 Route::get('post/categorie/{id}', [PostController::class, 'postsByCategorie']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::get('/users', [AuthController::class, 'index']);
+Route::delete('/user/{id}', [AuthController::class, 'destroy']);
+
+Route::post('/loginAdmin', [authAdmine::class, 'login']);
+Route::post('/registerAdmin', [authAdmine::class, 'register']);
+
 Route::post('/getAllPosts', [PostController::class, 'getAllPosts']);
 
 Route::post('/post/like', [PostController::class, 'likes']);
@@ -50,6 +57,7 @@ Route::post('/post/dislike', [PostController::class, 'dislikes']);
 Route::delete('post/like/{id}', [PostController::class, 'destroyLike']);
 Route::delete('post/dislike/{id}', [PostController::class, 'destroydisLike']);
 
+Route::delete('/post/{id}', [PostController::class, 'destroy']);
 
 Route::get('/token', function () {
     return csrf_token();
@@ -65,7 +73,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/post', [PostController::class, 'store']);
     Route::post('/comment', [CommentController::class, 'store']);
     Route::put('/post/{id}', [PostController::class, 'update']);
-    Route::delete('/post/{id}', [PostController::class, 'destroy']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

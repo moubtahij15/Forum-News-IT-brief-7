@@ -15,6 +15,12 @@ import router from "../router";
 
 const store = createStore({
     state: {
+        users: {
+            data: {},
+            tokenAdmin: sessionStorage.getItem("TOKEN_ADMIN"),
+        },
+
+
 
         user: {
             data: {},
@@ -40,6 +46,41 @@ const store = createStore({
     getters: {},
 
     actions: {
+        // admin
+        getAllUsers({ commit }) {
+            return axiosClient.get('/users')
+                .then(response => {
+                    // response.data.forEach(obj => {
+                    //     Object.entries(obj).forEach(([key, value]) => {
+                    //         console.log(`${key} ${value}`);
+                    //         if()
+
+                    //     }); });                    
+                    commit("setUsers", response.data);
+                    // console.log(response.data.posts);
+                    return response.data
+                });
+
+        },
+        // delete user
+        deleteUser({ commit }, id) {
+            return axiosClient.delete('/user/' + id)
+                .then(response => {
+                    // response.data.forEach(obj => {
+                    //     Object.entries(obj).forEach(([key, value]) => {
+                    //         console.log(`${key} ${value}`);
+                    //         if()
+
+                    //     }); });                    
+                    // console.log(response.data.posts);
+                    return response.data
+                });
+
+        },
+
+        // end admin
+
+
 
         register({ commit }, user) {
 
@@ -310,10 +351,10 @@ const store = createStore({
         },
         setUser: (state, user) => {
             state.user.data = user;
-           
-                state.user.id = user.id;
 
-        
+            state.user.id = user.id;
+
+
             sessionStorage.setItem('idUser', state.user.id);
             // sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
             // sessionStorage.setItem('userInfos', "state.user.data");
@@ -341,6 +382,19 @@ const store = createStore({
             sessionStorage.clear();
         },
 
+        //admin
+
+        setUsers: (state, users) => {
+            state.users.data = users;
+
+            // state.user.id = user.id;
+
+
+            // sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
+            // sessionStorage.setItem('userInfos', "state.user.data");
+
+
+        },
     },
     modules: {},
 

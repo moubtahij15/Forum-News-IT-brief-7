@@ -127,7 +127,7 @@
             </div>
             <div class="rounded-full h-3.5 flex	items-center justify-center">
 
-                <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'trash']"
+                <FIcons v-if="this.$parent.$options.name == 'profile' || this.$parent.$options.name=='dashboardAdmin'" id="delete" :icon="['fas', 'trash']"
                     class="h-5 w-5 mt-6" @click="deletePost(elem.id)" />
                 <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'edit']"
                     class="h-5 w-5 mt-6 mx-2" v-on:click="toggleModal(elem)" />
@@ -154,7 +154,7 @@
           class="bg-red-500 rounded-2xl w-1/3 object-cover h-96 flex-auto" alt="photo">
       </div> -->
         <!-- reaction -->
-        <div class=" h-16 border-b  flex items-center justify-around	">
+        <div class=" h-16 border-b  flex items-center justify-around	" v-if="this.$parent.$options.name!='dashboardAdmin'">
             <div class="flex items-center	gap-3	">
 
                 <PencilAltIcon class="h-6 w-6" />
@@ -191,7 +191,7 @@
 
         <!-- comment -->
         <!-- post a comment -->
-        <div
+        <div  v-if="this.$parent.$options.name!='dashboardAdmin'"
             class="relative flex items-center self-center w-full max-w-xxl p-4 overflow-hidden text-gray-600 focus-within:text-gray-400">
             <img class='w-10 h-10 object-cover rounded-full shadow mr-2 cursor-pointer' alt='User avatar'
                 src='https://images.unsplash.com/photo-1477118476589-bff2c5c4cfbb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=200&q=200'>
@@ -226,7 +226,7 @@
             </div>
 
 
-            <FIcons v-if="this.$parent.$options.name == 'profile'" id="delete" :icon="['fas', 'trash']"
+            <FIcons v-if="this.$parent.$options.name == 'profile' || this.$parent.$options.name=='dashboardAdmin'" id="delete" :icon="['fas', 'trash']"
                 class="h-5 w-5 mt-6" @click="deleteComment(ele.id_comment)" />
         </div>
 
@@ -299,35 +299,7 @@ export default {
                 console.log(this.postData)
             }
         },
-        // delete comment
-        deleteComment(id) {
-            // console.log(id);
-            store
-                .dispatch('deleteComment', id)
-                .then((response) => {
-
-                    if (this.$parent.$options.name == 'homePage') {
-                        this.getAllPosts();
-                    } else if (this.$parent.$options.name == 'profile') {
-                        this.getAllPostsUser()
-                    }
-
-                })
-        },
-        // delete post
-        deletePost(id) {
-            console.log(id);
-            store
-                .dispatch('deletePost', id)
-                .then((response) => {
-
-                    if (this.$parent.$options.name == 'homePage') {
-                        this.getAllPosts();
-                    } else if (this.$parent.$options.name == 'profile') {
-                        this.getAllPostsUser()
-                    }
-                })
-        },
+      
         // get all posts
         getAllPosts() {
             store
@@ -355,7 +327,7 @@ export default {
                     console.log(response);
                      this.showModal=!this.showModal ;
 
-                    if (this.$parent.$options.name == 'homePage') {
+                    if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                         this.getAllPosts();
                     } else if (this.$parent.$options.name == 'profile') {
                         this.getAllPostsUser()
@@ -407,7 +379,7 @@ export default {
                     //   .dispatch('getAllComments')
                     // console.log(response);
                     this.comment.sjt_comments = "";
-                    if (this.$parent.$options.name == 'homePage') {
+                    if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                         this.getAllPosts();
                     } else if (this.$parent.$options.name == 'profile') {
                         this.getAllPostsUser()
@@ -459,7 +431,7 @@ export default {
 
                         }
 
-                        if (this.$parent.$options.name == 'homePage') {
+                        if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                             this.getAllPosts();
                         } else if (this.$parent.$options.name == 'profile') {
                             this.getAllPostsUser()
@@ -479,7 +451,7 @@ export default {
                         //   .dispatch('getAllComments')
                         // console.log(response);
                         // this.comment.sjt_comments = "";
-                        if (this.$parent.$options.name == 'homePage') {
+                        if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                             this.getAllPosts();
                         } else if (this.$parent.$options.name == 'profile') {
                             this.getAllPostsUser()
@@ -524,7 +496,7 @@ export default {
 
                         }
                         // this.setLike(post)
-                        if (this.$parent.$options.name == 'homePage') {
+                        if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                             this.getAllPosts();
                         } else if (this.$parent.$options.name == 'profile') {
                             this.getAllPostsUser()
@@ -544,7 +516,7 @@ export default {
                         //   .dispatch('getAllComments')
                         // console.log(response);
                         // this.comment.sjt_comments = "";
-                        if (this.$parent.$options.name == 'homePage') {
+                        if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                             this.getAllPosts();
                         } else {
                             this.getAllPostsUser()
@@ -576,7 +548,7 @@ export default {
                 .dispatch('deleteComment', id)
                 .then((response) => {
 
-                    if (this.$parent.$options.name == 'homePage') {
+                    if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                         this.getAllPosts();
                     } else if (this.$parent.$options.name == 'profile') {
                         this.getAllPostsUser()
@@ -591,7 +563,7 @@ export default {
                 .dispatch('deletePost', id)
                 .then((response) => {
 
-                    if (this.$parent.$options.name == 'homePage') {
+                    if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
                         this.getAllPosts();
                     } else if (this.$parent.$options.name == 'profile') {
                         this.getAllPostsUser()
@@ -609,14 +581,14 @@ export default {
 
         // this.post = store.state.post.data;
         if (this.testCate) {
-            if (this.$parent.$options.name == 'homePage') {
+            if (this.$parent.$options.name == 'homePage' || this.$parent.$options.name=="dashboardAdmin") {
                 this.getAllPosts();
             } else {
                 this.getAllPostsUser()
             }
 
         }
-        if (this.$parent.$options.name == 'homePage') {
+        if (this.$parent.$options.name == 'homePage'|| this.$parent.$options.name=="dashboardAdmin") {
             this.getAllPosts();
         } else {
             this.getAllPostsUser()
