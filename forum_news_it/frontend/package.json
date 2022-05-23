@@ -15,6 +15,8 @@
     "@headlessui/vue": "^1.5.0",
     "@heroicons/vue": "^1.0.6",
     "@tailwindcss/forms": "^0.5.0",
+    "@vuelidate/core": "^2.0.0-alpha.41",
+    "@vuelidate/validators": "^2.0.0-alpha.29",
     "axios": "^0.27.2",
     "flowbite": "^1.4.7",
     "vue": "^3.2.25",

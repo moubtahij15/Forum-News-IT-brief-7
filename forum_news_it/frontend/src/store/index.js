@@ -53,8 +53,11 @@ const store = createStore({
 
             return axiosClient.post('/login', user)
                 .then(response => {
-                    commit('setUser', response.data.utilisateur);
-                    commit('setToken', response.data.token)
+                    if (response.data.message == "success") {
+                        commit('setUser', response.data.utilisateur);
+                        commit('setToken', response.data.token)
+                    }
+
                     return response
                 });
         },
@@ -268,7 +271,7 @@ const store = createStore({
         //update post
         updatePost({ commit }, post) {
 
-            return axiosClient.put('/post/' + post.id,post)
+            return axiosClient.put('/post/' + post.id, post)
                 .then(response => {
 
                     console.log(response.data)
@@ -307,7 +310,10 @@ const store = createStore({
         },
         setUser: (state, user) => {
             state.user.data = user;
-            state.user.id = user.id;
+           
+                state.user.id = user.id;
+
+        
             sessionStorage.setItem('idUser', state.user.id);
             // sessionStorage.setItem('userInfo', JSON.stringify(state.user.data));
             // sessionStorage.setItem('userInfos', "state.user.data");

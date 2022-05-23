@@ -42,6 +42,8 @@
       </div>
     </div> -->
     <!-- modal for edit post -->
+
+
     <div v-if="showModal"
         class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
         <div class="relative w-auto my-6 mx-auto w-full max-w-3xl">
@@ -63,26 +65,27 @@
                 </div>
                 <!--body-->
                 <div class="relative p-6 flex-auto w-full">
-                    <div class="whitespace-pre-wrap mt-7"> <textarea v-model="this.sjtEdit" placeholder="prenom"
-                            class="bg-purple-white shadow rounded border-0 p-3 w-full" required="required"
-                            name="integration[shop_name]" id="integration_shop_name"></textarea>
+                    <div class="whitespace-pre-wrap mt-7"> <textarea v-model="this.postData.sjt_post"
+                            placeholder="prenom" class="bg-purple-white shadow rounded border-0 p-3 w-full"
+                            required="required" name="integration[shop_name]" id="integration_shop_name"></textarea>
                     </div>
                 </div>
                 <div class=" flex-1 px-2 pt-2 mx-10 m-2">
-
                     <select v-model="this.categEdit" required
-                        class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-                        <div>
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <!-- <option>{{ this.categEdit }}</option> -->
 
-                        </div>
-                        <!-- <option disabled>{{ this.categEdit }}</option> -->
-                        <option v-for="elem in $store.state.categorie.data" :key="elem.id">
+                        <option v-for="elem in $store.state.categorie.data" :value="elem.id" :key="elem.id"
+                            :selected="elem.nom_categorie == this.categEdit">
                             <div>{{
                                     elem.nom_categorie
                             }} </div>
                         </option>
+                        <option disabled value="">....</option>
+
 
                     </select>
+
                 </div>
                 <!--footer-->
                 <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
@@ -93,7 +96,7 @@
                     </button>
                     <button
                         class="text-green-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                        type="button" v-on:click="updatePost()">
+                        type="button" @click="updatePost()">
                         Save Changes
                     </button>
                 </div>
@@ -116,9 +119,10 @@
                     class="object-cover bg-yellow-500 rounded-full w-10 h-10" />
                 <div class="flex flex-col">
                     <b class="mb-2 capitalize"> {{ elem.utilisateur.prenom }} {{ elem.utilisateur.nom }}</b>
-                    <time datetime={{elem.date_post}} class="text-gray-400 text-xs">{{ elem.date_post }}
+                    <time datetime={{elem.created_at}} class="text-gray-400 text-xs">{{ elem.created_at }}
+                    {{ elem.categorie.nom_categorie}}
                     </time>
-                </div>
+                </div> 
 
             </div>
             <div class="rounded-full h-3.5 flex	items-center justify-center">
@@ -263,7 +267,7 @@ export default {
             testCate: true,
             idComment: this.$options.name,
             showModal: false,
-            sjtEdit: "",
+            idCat: "",
             categEdit: "",
 
 
@@ -283,14 +287,16 @@ export default {
             console.log(elm.categorie)
 
         },
-        toggleModal: function (elm) {
+        toggleModal(elm) {
             this.showModal = !this.showModal;
             if (this.showModal) {
-                this.id=elm.id;
-                this.postData.sjt_post = elm.sjt_post;
-                this.postData.categorie_id = elm.categorie.nom_categorie
-                console.log(this.categEdit)
 
+                this.postData.id = elm.id;
+                this.postData.sjt_post = elm.sjt_post;
+                // this.postData.categorie_id = elm.categorie.id
+                this.categEdit = elm.categorie.nom_categorie
+                this.categEdit = elm.categorie.id
+                console.log(this.postData)
             }
         },
         // delete comment
@@ -337,13 +343,17 @@ export default {
 
 
         },
-        updatePost(post) {
+        updatePost() {
+            this.postData.categorie_id=this.categEdit
+
+            console.log(this.postData)
 
             store
-                .dispatch('updatePost' + post.id, post)
+                .dispatch('updatePost',this.postData)
                 .then((response) => {
                     // console.log(response)
                     console.log(response);
+                     this.showModal=!this.showModal ;
 
                     if (this.$parent.$options.name == 'homePage') {
                         this.getAllPosts();
@@ -595,6 +605,8 @@ export default {
     },
 
     mounted() {
+        console.log(this.postData);
+
         // this.post = store.state.post.data;
         if (this.testCate) {
             if (this.$parent.$options.name == 'homePage') {
@@ -611,7 +623,6 @@ export default {
         }
         this.setCategories();
         this.idComment = this.$options.name
-        console.log(this.nameMethod);
 
     },
     props: {
